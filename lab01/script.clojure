@@ -1,0 +1,102 @@
+Script started on 2020-02-06 13:08:11-0500
+dar23@gold14:~/cs214/clojure$ cat src/circle_area.clj 
+;;;; circle_area.clj calculates the area of a circle.
+;;;;
+;;;; Input: The radius of a circle.
+;;;; Output: The area of that circle.
+;;;;
+;;;; Usage: clojure -m circle_area
+;;;;
+;;;; Begun by: Prof. Adams, for CS 214 at Calvin College.
+;;;; Completed by: David Reidsma
+;;;; Date: 06/02/2020
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(ns circle_area) ; namespace function names the program
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Function circleArea() computes the area of a circle.
+;;; Receive: itsRadius, a number.
+;;; Precondition: itsRadius >= 0.0.
+;;; Return: the area of the corresponding circle.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defn circleArea [itsRadius]
+  (* Math/PI (* itsRadius itsRadius) )  ; return PI*r^2
+)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Function -main is where execution begins
+;;; Input: the radius of a circle.
+;;; Output: the area of that circle.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defn -main []
+  (println "\nTo compute the area of a circle,")
+  (print   " enter its radius: ") (flush)
+  (let
+    [ radius (read) ]
+
+    (assert (>= radius 0) "-main: radius must be positive")
+    (printf "\nThe area is %f\n\n" (circleArea radius))
+
+    (print "\nThe area is ")
+    (print (circleArea radius))
+    (print "\n\n")
+
+    (printf "\nThe area is %.15f\n\n" (circleArea radius))
+  )
+) 
+dar23@gold14:~/cs214/clojure$ clojure -mj    circle_area. 
+
+To compute the area of a circle,
+ enter its radius: 1
+
+The area is 3.141593
+
+
+The area is 3.141592653589793
+
+
+The area is 3.141592653589793
+
+dar23@gold14:~/cs214/clojure$ clojure -m circle_area
+
+To compute the area of a circle,
+ enter its radius: 2
+
+The area is 12.566371
+
+
+The area is 12.566370614359172
+
+
+The area is 12.566370614359172
+
+dar23@gold14:~/cs214/clojure$ clojure -m circle_area
+
+To compute the area of a circle,
+ enter its radius: 2.5
+
+The area is 19.634954
+
+
+The area is 19.634954084936208
+
+
+The area is 19.634954084936208
+
+dar23@gold14:~/cs214/clojure$ clojure -m circle_area
+
+To compute the area of a circle,
+ enter its radius: 4.9099   9999
+
+The area is 78.539502
+
+
+The area is 78.53950218079363
+
+
+The area is 78.539502180793630
+
+dar23@gold14:~/cs214/clojure$ exit
+
+Script done on 2020-02-06 13:08:49-0500
