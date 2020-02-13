@@ -1,0 +1,13 @@
+Findings on lex.yy.c lines 740-770:
+
+Line 741: Preprocessor directive: "#line 742 "lex.yy.c""
+Line 742: A case statement for what looks to be the end of the file.
+Line 743: Presumably terminates the program if the case statement is entered.
+Line 745: A case statement for the end of the buffer.
+Line 748: An integer storing the amount of "text matched not including the EOB char."
+Line 751: Unsure.
+Line 752: Unsure
+Line 754: If statement checking if the current buffer is a new buffer(?).
+Line 765-767: Unsure.
+
+
