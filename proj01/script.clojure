@@ -1,0 +1,66 @@
+Script started on 2020-02-12 14:20:32-05:00 [TERM="screen" TTY="/dev/pts/3" COLUMNS="172" LINES="82"]
+kdavidreidsma@localhost:~/Programming/Calvin/214/proj01\[davidreidsma@localhost proj01]$ cd clojure
+kdavidreidsma@localhost:~/Programming/Calvin/214/proj01/clojure\[davidreidsma@localhost clojure]$ ls
+[0m[01;34msrc[0m
+kdavidreidsma@localhost:~/Programming/Calvin/214/proj01/clojure\[davidreidsma@localhost clojure]$ ls src
+rectangle_area.clj
+kdavidreidsma@localhost:~/Programming/Calvin/214/proj01/clojure\[davidreidsma@localhost clojure]$ cat sc[Krc/rectangle_area.clj 
+;;;;
+;;;; Usage: clojure -m rectangle_area
+;;;;
+;;;; Author: David Reidsma
+;;;; Date: 11/02/2020
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(ns rectangle_area)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Function rectangleArea() computes the area of a rectangle.
+;;; Receive: width, a number; must be greater than 0
+;;; Receive: length, a number; must be greater than 0
+;;; Return: the area of the corresponding rectangle.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defn rectangleArea [width, length]
+  (* width length)
+)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Function main is where execution begins
+;;; Input: the width and length of a rectangle.
+;;; Output: the area of that rectangle.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defn -main []
+  (println "\nTo compute the area of a rectangle,")
+
+  (print " enter its width: ") (flush)
+  (let
+    [ width (read) ]
+    (assert (> width 0) "-main: width must be positive")
+
+    (print " enter its length: ") (flush)
+    (let
+      [ length (read) ]
+      (assert (> length 0) "-main: length must be positive")
+
+      (printf "\nThe area is %.15f\n" (float (* width length)))
+    )
+  )
+)
+kdavidreidsma@localhost:~/Programming/Calvin/214/proj01/clojure\[davidreidsma@localhost clojure]$ clojure rectangle_area
+
+To compute the area of a rectangle,
+ enter its width: 2
+ enter its length: 2
+
+The area is 4.000000000000000
+kdavidreidsma@localhost:~/Programming/Calvin/214/proj01/clojure\[davidreidsma@localhost clojure]$ clojure -m rectangle_area
+
+To compute the area of a rectangle,
+ enter its width: 4
+ enter its length: 5
+
+The area is 20.000000000000000
+kdavidreidsma@localhost:~/Programming/Calvin/214/proj01/clojure\[davidreidsma@localhost clojure]$ cd ..
+kdavidreidsma@localhost:~/Programming/Calvin/214/proj01\[davidreidsma@localhost proj01]$ exit
+
+Script done on 2020-02-12 14:21:59-05:00 [COMMAND_EXIT_CODE="0"]
