@@ -50,7 +50,3 @@ The differences are that the non-terminals reference other things. The terminals
 
 I did find some strange behavior in the example. It does not say "Heat turned on" or "Heat turned off", but "Heat turned on or off". It does not put a newline when you enter in something that it doesn't recognize and it echoes it back to you, which is presumably wrong.
 
-
-Findings on example 5:
-
-

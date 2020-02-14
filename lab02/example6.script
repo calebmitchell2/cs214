@@ -1,0 +1,102 @@
+Script started on 2020-02-14 15:46:58-05:00 [TERM="screen" TTY="/dev/pts/1" COLUMNS="109" LINES="58"]
+[davidreidsma@davidr-fedora lab02]$ cat example6.lex
+%{
+#include <stdio.h>
+#include <stdlib.h>           /* atoi() */
+#include <string.h>           /* strcmp() */
+#include "example6.tab.h"
+%}
+%%
+[0-9]+                  yylval = atoi(yytext); return NUMBER;
+heat                    return TOKHEAT;
+on|off                  yylval = !strcmp(yytext,"on"); return STATE;
+set                     return TOKSET;
+humidity                return TOKHUMIDITY;
+temperature             return TOKTEMPERATURE;
+\n                      /* ignore end of line */;
+[ \t]+                  /* ignore whitespace */;
+%%
+[davidreidsma@davidr-fedora lab02]$ cat example6.y
+%{
+#include <stdio.h>
+#include <string.h>
+
+/* declarations */
+int yylex (void);
+void yyerror (char const *);
+int yyparse(void);
+
+/* definitions */ 
+void yyerror(const char *str) {
+        fprintf(stderr,"error: %s\n",str);
+}
+ 
+int yywrap() {
+        return 1;
+} 
+ 
+int main() {
+        yyparse();
+} 
+
+%}
+
+%token NUMBER TOKHEAT STATE TOKSET TOKHUMIDITY TOKTEMPERATURE
+%%
+
+commands: /* empty */
+        | commands command
+        ;
+
+command:
+        heat_switch
+        | temperature_set
+        | humidity_set
+        ;
+
+heat_switch:
+        TOKHEAT STATE
+        {
+                if ($2) {  /* if STATE == 1 */
+                        printf("\tHeat turned on\n");
+                } else {
+                        printf("\tHeat turned off\n");
+                }
+        }
+        ;
+
+humidity_set:
+        TOKSET TOKHUMIDITY NUMBER
+        {
+                printf("\tHumidity set to %d\n", $3);
+        }
+        ;
+
+temperature_set:
+        TOKSET TOKTEMPERATURE NUMBER
+        {
+                printf("\tTemperature set to %d\n", $3);
+        }
+        ;
+
+
+[davidreidsma@davidr-fedora lab02]$ flex example6.lex
+[davidreidsma@davidr-fedora lab02]$ bison -d example6.y
+[davidreidsma@davidr-fedora lab02]$ gcc lex.yy.c example6.tab.c -o example6
+[davidreidsma@davidr-fedora lab02]$ ./example6
+heat on
+	Heat turned on
+heat off
+	Heat turned off
+set humidity 0
+	Humidity set to 0
+set humidity 999
+	Humidity set to 999
+set temperature 0
+	Temperature set to 0
+set temperature 9999
+	Temperature set to 9999
+[davidreidsma@davidr-fedora lab02]$ exit
+exit
+
+Script done on 2020-02-14 15:49:09-05:00 [COMMAND_EXIT_CODE="0"]

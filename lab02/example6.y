@@ -31,8 +31,8 @@ commands: /* empty */
 
 command:
         heat_switch
-        |   temperature_set
-        |   humidity_set
+        | temperature_set
+        | humidity_set
         ;
 
 heat_switch:

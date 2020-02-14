@@ -463,7 +463,7 @@ char *yytext;
 #include <stdio.h>
 #include <stdlib.h>           /* atoi() */
 #include <string.h>           /* strcmp() */
-#include "example5.tab.h"
+#include "example6.tab.h"
 #line 467 "lex.yy.c"
 #line 468 "lex.yy.c"
 
