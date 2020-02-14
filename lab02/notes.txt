@@ -1,4 +1,4 @@
-Findings on lex.yy.c lines 740-770:
+Findings on example 1 (lex.yy.c lines 740-770):
 
 Line 741: Preprocessor directive: "#line 742 "lex.yy.c""
 Line 742: A case statement for what looks to be the end of the file.
@@ -9,5 +9,48 @@ Line 751: Unsure.
 Line 752: Unsure
 Line 754: If statement checking if the current buffer is a new buffer(?).
 Line 765-767: Unsure.
+
+
+Findings on example 2:
+
+When underscores are entered into this example, they are just repeated back to the user.
+This happens because it doesn't know how to process them; they aren't numbers or words, so it just spits them back out.
+
+
+Findings on example 4:
+
+In the context of that grammar, the non-terminals are:
+
+commands: /* empty */
+        | commands command
+        ;
+
+command:
+        heat_switch
+        | temperature_set
+        ;
+
+The terminals are:
+
+heat_switch:
+        TOKHEAT STATE
+        {
+                printf("\tHeat turned on or off\n");
+        }
+        ;
+
+temperature_set:
+        TOKSET TOKTEMPERATURE NUMBER
+        {
+                printf("\tTemperature set\n");
+        }
+        ;
+
+The differences are that the non-terminals reference other things. The terminals do not reference other things in the grammar.
+
+I did find some strange behavior in the example. It does not say "Heat turned on" or "Heat turned off", but "Heat turned on or off". It does not put a newline when you enter in something that it doesn't recognize and it echoes it back to you, which is presumably wrong.
+
+
+Findings on example 5:
 
 
