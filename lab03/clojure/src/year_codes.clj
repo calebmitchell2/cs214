@@ -9,8 +9,8 @@
 ;;;; Usage: clojure -m year_codes
 ;;;;
 ;;;; Begun by: Prof. Adams, for CS 214 at Calvin College.
-;;;; Completed by:
-;;;; Date:
+;;;; Completed by: David Reidsma
+;;;; Date: 02/21/2020
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (ns year_codes)                    ; name the program

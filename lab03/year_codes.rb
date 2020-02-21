@@ -1,6 +1,8 @@
 #! /usr/bin/ruby
 # year_codes.rb translates an academic year into a numeric code
-# Begun by: Dr. Nelesen, for CS 214 at Calvin College 
+# Begun by: Dr. Nelesen, for CS 214 at Calvin College
+# Finished by: David Reidsma
+# Date: 02/21/2020 
 ################################################################
 
 # Input:  The name of an academic year
