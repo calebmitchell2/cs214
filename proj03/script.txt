@@ -1,0 +1,186 @@
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj03\[davidreidsma@davidr-fedora proj03]$ cat ada/case_statement.adb
+-- case_statement.adb is a driver for letterGrade.
+--
+-- Author: David Reidsma
+-- Date:   02/25/2020
+
+with Ada.Text_IO, Ada.Integer_Text_IO;
+use  Ada.Text_IO, Ada.Integer_Text_IO;
+
+procedure case_statement is
+    
+    grade : integer := 0;
+
+    -- letterGrade converts a numerical grade into its letter code.
+    -- Input: average, a numerical grade in range 0-100.
+    -- Output: A letter grade.
+    function letterGrade(average : integer) return character is
+    begin
+        case average / 10 is
+            when 10 | 9 => return 'A';
+            when 8 => return 'B';
+            when 7 => return 'C';
+            when 6 => return 'D';
+            when others => return 'F';
+        end case;
+    end letterGrade;
+
+-- Main function of a program that allows the user to enter a numerical grade from 0-100 and then prints out the equivalent letter grade.
+begin
+    Put("Enter your grade: ");
+    Get(grade);
+    Put(letterGrade(grade));
+end case_statement;
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj03\[davidreidsma@davidr-fedora proj03]$ gnatmake ada/case_statement.adb
+gcc -c -Iada/ -I- ada/case_statement.adb
+gnatbind -x case_statement.ali
+gnatlink case_statement.ali
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj03\[davidreidsma@davidr-fedora proj03]$ ./ada/case_statement
+Enter your grade: 95
+A
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj03\[davidreidsma@davidr-fedora proj03]$ ./ada/case_statement
+Enter your grade: 54
+F
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj03\[davidreidsma@davidr-fedora proj03]$ ./ada/case_statement
+Enter your grade: 76
+C
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj03\[davidreidsma@davidr-fedora proj03]$ exit
+
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj03\[davidreidsma@davidr-fedora proj03]$ cat clojure/src/case_statement.clj
+;;;; case_statement.clj is a driver for letterGrade.
+;;;;
+;;;; Author:    David Reidsma
+;;;; Date:      02/25/2020
+
+(ns case_statement)
+
+;;; letterGrade converts a numerical grade into its letter code.
+;;; Input: average, a numerical grade in range 0-100.
+;;; Output: A letter grade.
+(defn letterGrade [average]
+  (let [grade (int (/ average 10))]
+    (cond
+      (or (= grade 10) (= grade 9)) "A"
+      (= grade 8) "B"
+      (= grade 7) "C"
+      (= grade 6) "D"
+      :else "F"
+    )
+  )
+)
+
+;;; Main function of a program that allows the user to enter a numerical grade from 0-100 and then prints out the equivalent letter grade.
+(defn -main []
+  (print "Enter your grade: ") (flush)
+  (let [average (read)]
+    (println (letterGrade average))
+  )
+)
+
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj03\[davidreidsma@davidr-fedora proj03]$ cd clojure
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj03/clojure\[davidreidsma@davidr-fedora clojure]$ clojure -m case_statement
+Enter your grade: 95
+A
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj03/clojure\[davidreidsma@davidr-fedora clojure]$ clojure -m case_statement
+Enter your grade: 54
+F
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj03/clojure\[davidreidsma@davidr-fedora clojure]$ clojure -m case_statement
+Enter your grade: 76
+C
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj03/clojure\[davidreidsma@davidr-fedora clojure]$ exit
+
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj03\[davidreidsma@davidr-fedora proj03]$ cd java
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj03/java\[davidreidsma@davidr-fedora java]$ cat CaseStatement.java
+/**
+ * CaseStatement.java is a driver for letterGrade.
+ *
+ * Author: David Reidsma
+ * Date:   02/25/2020
+ */
+import java.util.Scanner;
+
+public class CaseStatement {
+    
+    /**
+     * Main function of a program that allows the user to enter a numerical grade from 0-100 and then prints out the equivalent letter grade.
+     */
+    public static void main(String[] args) {
+        System.out.print("Enter your grade: ");
+
+        Scanner scanner = new Scanner(System.in);
+        int grade = Integer.parseInt(scanner.next());
+
+        CaseStatement cs = new CaseStatement();
+        System.out.println(cs.letterGrade(grade));
+    }
+
+    /**
+     * letterGrade converts a numerical grade into its letter code.
+     * @param average A numerical grade in range 0-100.
+     * @return A letter grade.
+     */
+    char letterGrade(int average) {
+        switch (average / 10) {
+            case 10:
+            case 9:
+                return 'A';
+            case 8:
+                return 'B';
+            case 7:
+                return 'C';
+            case 6:
+                return 'D';
+            default:
+                return 'F';
+        }
+    }
+}
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj03/java\[davidreidsma@davidr-fedora java]$ javac -deprecation CaseStatement.java
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj03/java\[davidreidsma@davidr-fedora java]$ java CaseStatement
+Enter your grade: 95
+A
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj03/java\[davidreidsma@davidr-fedora java]$ java CaseStatement
+Enter your grade: 54
+F
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj03/java\[davidreidsma@davidr-fedora java]$ java CaseStatement
+Enter your grade: 76
+C
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj03/java\[davidreidsma@davidr-fedora java]$ exit
+
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj03\[davidreidsma@davidr-fedora proj03]$ cat ruby/case_statement.rb
+#! /usr/bin/ruby
+# case_statement.rb is a driver for letterGrade.
+#
+# Author: David Reidsma
+# Date:   02/25/2020
+
+# Input:        A numerical grade.
+# Output:       A letter grade.
+# Precondition: The input is an integer in range 0-100.
+def letterGrade(average)
+  case average / 10
+    when 9..10 then 'A'
+    when 8 then 'B'
+    when 7 then 'C'
+    when 6 then 'D'
+  else 'F'
+  end
+end
+
+# Main function of a program that allows the user to enter a numerical grade from 0-100 and then prints out the equivalent letter grade.
+if __FILE__ == $0
+  print "Enter your grade: "
+  grade = gets
+  puts letterGrade(grade.to_i)
+end
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj03\[davidreidsma@davidr-fedora proj03]$ ruby ruby/case_statement.rb 
+Enter your grade: 95
+A
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj03\[davidreidsma@davidr-fedora proj03]$ ruby ruby/case_statement.rb 
+Enter your grade: 54
+F
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj03\[davidreidsma@davidr-fedora proj03]$ ruby ruby/case_statement.rb 
+Enter your grade: 76
+C
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj03\[davidreidsma@davidr-fedora proj03]$ exit
+
