@@ -1,0 +1,234 @@
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/lab04\[davidreidsma@davidr-fedora lab04]$ cat ada/log_table.adb
+-- log_table.adb computes a table of logarithms.
+--
+-- Input: start, stop, increment, three reals.
+-- Precondition: increment is positive.
+-- Output: A table of logarithms beginning with log(start),
+--         ending with log(stop), with intervals of increment.
+--
+-- Begun by: Prof. Adams, for CS 214 at Calvin College.
+-- Completed by: David Reidsma
+--------------------------------------------------------------
+
+with Ada.Text_IO, Ada.Float_Text_IO, Ada.Numerics.Elementary_Functions;
+use  Ada.Text_IO, Ada.Float_Text_IO, Ada.Numerics.Elementary_Functions;
+
+procedure log_table is
+
+   Start, Stop, Increment, Counter: Float;
+
+begin                                           -- Prompt for input
+   Put_Line("To print a table of logarithms,");
+   Put_Line("enter the start, stop, and increment values: ");
+   Get(Start); Get(Stop); Get(Increment);
+
+   Counter := Start;
+   while Counter <= Stop loop
+      Put("The logarithm of ");
+      Put(Counter, 1, 15, 0);
+      Put(" is ");
+      Put(log(Counter, 10.0), 1, 15, 0);
+      New_Line;
+      Counter := Counter + Increment;
+   end loop;
+end log_table;
+
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/lab04\[davidreidsma@davidr-fedora lab04]$ cd ada
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/lab04/ada\[davidreidsma@davidr-fedora ada]$ gnatmake log_table.adb
+gnatmake: "log_table" up to date.
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/lab04/ada\[davidreidsma@davidr-fedora ada]$ ./log_table
+To print a table of logarithms,
+enter the start, stop, and increment values: 
+1
+2
+0.5
+The logarithm of 1.000000000000000 is 0.000000000000000
+The logarithm of 1.500000000000000 is 0.176091253757477
+The logarithm of 2.000000000000000 is 0.301030009984970
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/lab04/ada\[davidreidsma@davidr-fedora ada]$ exit
+
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/lab04\[davidreidsma@davidr-fedora lab04]$ cd clojure
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/lab04/clojure\[davidreidsma@davidr-fedora clojure]$ cat src/logTable.clj
+;;;; logTable.clj displays a table of logarithms.
+;;;;
+;;;; Input: start, stop and increment, three numbers.
+;;;; Precondition: start < stop && increment > 0.
+;;;; Output: A table of logarithms from start to stop,
+;;;;          with interval of increment.
+;;;;
+;;;; Begun by: Prof. Adams, for CS 214 at Calvin College.
+;;;; Completed by: David Reidsma
+;;;; Date: 02/27/2020
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(ns logTable)                                 ; name the program
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; displayLogTable() recursively generates the log-table.
+;;; Receive: start the first value for the table;
+;;;          stop, the last  value for the table;
+;;;           step, the step value for the table;
+;;; Precondition: start < stop && increment > 0.
+;;; Output: The table of logs from start to stop, by step.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; direct-recursive version
+(defn displayLogTable [start, stop, step]
+  (if (<= start stop)
+    (do
+      (printf "The logarithm of %f is %f\n" start (Math/log10 start))
+      (displayLogTable (+ start step) stop step)
+    )
+  )
+)
+
+;; loop (indirect-recursion) version
+(defn displayLogTable2 [start, stop, step]
+  (loop [i start]
+    (when (<= i stop)
+      (printf "The logarithm of %f is %f\n" i (Math/log10 i))
+      (recur (+ i step))
+    )
+  )
+)
+
+;; indirect/tail-recursive version (just using recur)
+(defn displayLogTable3 [start stop step]
+  (if (<= start stop)
+    (do
+      (printf "The logarithm of %f is %f\n" start (Math/log10 start))
+      (recur (+ start step) stop step)
+    )
+  )
+)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; -main is a 'driver' for the displayLogTable() functions.
+;;; Input: start, stop and increment.
+;;; Output: The table of logarithms 
+;;;          from start to stop by increment
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn -main []
+ (println "To display a table of logarithms,")
+ (println "enter the start, stop, and increment values: ") (flush)
+ (let
+    [ start (double (read))
+      stop (double (read))
+      increment (double (read))
+    ] 
+    (println)
+    (displayLogTable start stop increment)
+    (println)
+    (displayLogTable2 start stop increment) 
+    (println)
+    (displayLogTable3 start stop increment) 
+    (println)
+ )
+)
+
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/lab04/clojure\[davidreidsma@davidr-fedora clojure]$ clojure -m logTable
+To display a table of logarithms,
+enter the start, stop, and increment values: 
+1
+2
+0.5
+
+The logarithm of 1.000000 is 0.000000
+The logarithm of 1.500000 is 0.176091
+The logarithm of 2.000000 is 0.301030
+
+The logarithm of 1.000000 is 0.000000
+The logarithm of 1.500000 is 0.176091
+The logarithm of 2.000000 is 0.301030
+
+The logarithm of 1.000000 is 0.000000
+The logarithm of 1.500000 is 0.176091
+The logarithm of 2.000000 is 0.301030
+
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/lab04/clojure\[davidreidsma@davidr-fedora clojure]$ exit
+
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/lab04\[davidreidsma@davidr-fedora lab04]$ cd java
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/lab04/java\[davidreidsma@davidr-fedora java]$ cat LogTable.java
+/* LogTable.java displays a table of logarithms.
+ *
+ * Input: start, stop and increment, three doubles.
+ * PRE: start < stop && increment > 0.
+ * Output: A table of logarithms from start to stop,
+ *         with increment as the step value.
+ * Begun by: Nelesen, for CS 214 at Calvin College.
+ * Completed by: David Reidsma
+ ********************************************************/
+import java.util.Scanner; 		// Get input
+
+class LogTable{
+
+  public static void main(String[] args){
+    Scanner keyboard = new Scanner(System.in);
+    System.out.println("To display a table of logarithms,");
+    System.out.println("enter the start, stop and increment values: ");
+    double start, stop, increment;
+    start = keyboard.nextDouble();
+    stop = keyboard.nextDouble();
+    increment = keyboard.nextDouble();
+
+    double counter = start;
+    while (counter <= stop) {   
+        double log = Math.log10(counter);
+        System.out.println("The logarithm of " + counter + " is " + log);
+        counter += increment;
+    }
+  }
+}
+
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/lab04/java\[davidreidsma@davidr-fedora java]$ javac -deprecation LogTable.java
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/lab04/java\[davidreidsma@davidr-fedora java]$ java LogTable
+To display a table of logarithms,
+enter the start, stop and increment values: 
+0 1
+2
+0.5
+The logarithm of 1.0 is 0.0
+The logarithm of 1.5 is 0.17609125905568124
+The logarithm of 2.0 is 0.3010299956639812
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/lab04/java\[davidreidsma@davidr-fedora java]$ exit
+
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/lab04\[davidreidsma@davidr-fedora lab04]$ cd ruby
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/lab04/ruby\[davidreidsma@davidr-fedora ruby]$ cat logTable.rb 
+#! /usr/bin/ruby
+# logTable.rb displays a table of logarithms
+#
+# Begun by: Prof. Adams, for CS 214 at Calvin College.
+# Completed by: David Reidsma
+#
+# Input:  The start, stop and increment values
+# Precondition: The start value is less than the stop value, 
+#     and the increment is greater than 0
+# Output: A table of logarithms from start to stop, with increment
+#     as the step value
+
+
+if __FILE__ == $0
+   print "Enter the start value: "
+   start = gets.chomp.to_f
+   print "Enter the stop value: "
+   stop = gets.chomp.to_f
+   print "Enter the increment value: "
+   increment = gets.chomp.to_f
+
+   count = start
+   while count <= stop
+      puts "The logarithm of #{count} is #{Math.log10(count)}"
+      count += increment
+   end
+end
+
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/lab04/ruby\[davidreidsma@davidr-fedora ruby]$ ruby logTable.rb
+Enter the start value: 1
+Enter the stop value: 2
+Enter the increment value: 0.5
+The logarithm of 1.0 is 0.0
+The logarithm of 1.5 is 0.17609125905568124
+The logarithm of 2.0 is 0.3010299956639812
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/lab04/ruby\[davidreidsma@davidr-fedora ruby]$ exit
+
