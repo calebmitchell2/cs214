@@ -6,7 +6,7 @@
 with Ada.Text_IO, Ada.Integer_Text_IO, Ada.Float_Text_IO;
 use  Ada.Text_IO, Ada.Integer_Text_IO, Ada.Float_Text_IO;
 
-procedure for_loop is
+procedure factorial_driver is
     
     input : integer := 0;
     factorial : float := 0.0;
@@ -31,4 +31,4 @@ begin
     Put("! = ");
     factorial := getFactorial(input);
     Put(factorial, 1, 15, 0);
-end for_loop;
+end factorial_driver;
