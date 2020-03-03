@@ -1,0 +1,181 @@
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj04\[davidreidsma@davidr-fedora proj04]$ cat ada/factorial_driver.adb 
+-- factorial_driver.adb is a driver for getFactorial.
+--
+-- Author: David Reidsma
+-- Date:   03/02/2020
+
+with Ada.Text_IO, Ada.Integer_Text_IO, Ada.Float_Text_IO;
+use  Ada.Text_IO, Ada.Integer_Text_IO, Ada.Float_Text_IO;
+
+procedure factorial_driver is
+    
+    input : integer := 0;
+    factorial : float := 0.0;
+
+    -- getFactorial computes n!.
+    -- Input: n, an integer
+    -- Output: The factorial of n
+    function getFactorial(n : in integer) return float is
+        answer : float := 1.0;
+    begin
+        for i in integer range 2 .. n loop
+           answer := answer * Float(i);
+        end loop;
+        return answer;
+    end getFactorial;
+
+-- Main function of a program that computes factorials
+begin
+    Put("To compute n!, enter n: ");
+    Get(input);
+    Put(input);
+    Put("! = ");
+    factorial := getFactorial(input);
+    Put(factorial, 1, 15, 0);
+end factorial_driver;
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj04\[davidreidsma@davidr-fedora proj04]$ cd ada
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj04/ada\[davidreidsma@davidr-fedora ada]$ gnatmake factorial_driver.adb
+gnatmake: "factorial_driver" up to date.
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj04/ada\[davidreidsma@davidr-fedora ada]$ ./factorial_driver 
+To compute n!, enter n: 0
+          0! = 1.000000000000000
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj04/ada\[davidreidsma@davidr-fedora ada]$ ./factorial_driver 
+To compute n!, enter n: 10
+         10! = 3628800.000000000000000
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj04/ada\[davidreidsma@davidr-fedora ada]$ ./factorial_driver 
+To compute n!, enter n: 21
+         21! = 51090940837169725400.000000000000000
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj04/ada\[davidreidsma@davidr-fedora ada]$ exit
+
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj04\[davidreidsma@davidr-fedora proj04]$ cd clojure
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj04/clojure\[davidreidsma@davidr-fedora clojure]$ cat src/factorial_driver.clj 
+;;;; factorial_driver.clj is a driver for getFactorial.
+;;;;
+;;;; Author:    David Reidsma
+;;;; Date:      03/02/2020
+
+(ns factorial_driver)
+
+;;; getFactorialRecursive is the recursive part of getFactorial.
+;;; n: an integer to get the factorial of
+;;; counter: an integer that is the counter variable
+;;; answer: the answer that is multiplied by counter every iteration
+(defn getFactorialRecursive [n, counter, answer]
+  (if (<= counter n)
+    (getFactorialRecursive n (+ counter 1) (* answer counter))
+    answer
+  )
+)
+
+;;; getFactorial computes n!.
+;;; n: an integer
+;;; returns: The factorial of n
+(defn getFactorial [n]
+  (getFactorialRecursive n 2 1.0)
+)
+
+
+;;; Main function of a program that computes factorials
+(defn -main []
+  (print "To compute n!, enter n: ") (flush)
+  (let [n (read)]
+    (printf "!%d = " n)
+    (printf "%f\n" (getFactorial n))
+  )
+)
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj04/clojure\[davidreidsma@davidr-fedora clojure]$ clojure m[K-m factorial_r[Kdriver
+To compute n!, enter n: 0
+!0 = 1.000000
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj04/clojure\[davidreidsma@davidr-fedora clojure]$ clojure -m factorial_driver
+To compute n!, enter n: 10
+!10 = 3628800.000000
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj04/clojure\[davidreidsma@davidr-fedora clojure]$ clojure -m factorial_driver
+To compute n!, enter n: 21
+!21 = 51090942171709440000.000000
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj04/clojure\[davidreidsma@davidr-fedora clojure]$ exit
+
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj04\[davidreidsma@davidr-fedora proj04]$ cd java
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj04/java\[davidreidsma@davidr-fedora java]$ cat FactorialDriver.java
+/**
+ * FactorialDriver.java is a driver for getFactorial.
+ *
+ * Author: David Reidsma
+ * Date:   03/02/2020
+ */
+import java.util.Scanner;
+
+public class FactorialDriver {
+    
+    /**
+     * Main function of a program that computes factorials
+     */
+    public static void main(String[] args) {
+        System.out.print("To compute n!, enter n: ");
+
+        Scanner scanner = new Scanner(System.in);
+        int n = Integer.parseInt(scanner.next());
+
+        FactorialDriver driver = new FactorialDriver();
+        System.out.printf("%d! = %f\n", n, driver.getFactorial(n));
+    }
+
+    /**
+     * getFactorial computes n!.
+     * @param n An integer
+     * @return The factorial of n
+     */
+    double getFactorial(int n) {
+        double answer = 1.0;
+        for (int i = 2; i <= n; ++i) {
+            answer *= i;
+        }
+        return answer;
+    }
+}
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj04/java\[davidreidsma@davidr-fedora java]$ javac -deprecation FactorialDriver.java
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj04/java\[davidreidsma@davidr-fedora java]$ java FactorialDriver
+To compute n!, enter n: 0
+0! = 1.000000
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj04/java\[davidreidsma@davidr-fedora java]$ java FactorialDriver
+To compute n!, enter n: 10
+10! = 3628800.000000
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj04/java\[davidreidsma@davidr-fedora java]$ java FactorialDriver
+To compute n!, enter n: 21
+21! = 51090942171709440000.000000
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj04/java\[davidreidsma@davidr-fedora java]$ exit
+
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj04\[davidreidsma@davidr-fedora proj04]$ cd ruby
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj04/ruby\[davidreidsma@davidr-fedora ruby]$ cat factorialDriver.rb
+#! /usr/bin/ruby
+# factorialDriver.rb is a driver for getFactorial.
+#
+# Author: David Reidsma
+# Date:   03/02/2020
+
+# Input:        n, an integer
+# Output:       The factorial of n
+def getFactorial(n)
+  answer = 1.0
+  for i in 2..n
+    answer *= i
+  end
+  answer
+end
+
+# Main function of a program that computes factorials
+if __FILE__ == $0
+  print "To compute n!, enter n: "
+  n = gets.chomp.to_i
+  puts "!#{n} is %f" % getFactorial(n)
+end
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj04/ruby\[davidreidsma@davidr-fedora ruby]$ ruby factorialDriver.rb
+To compute n!, enter n: 0
+!0 is 1.000000
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj04/ruby\[davidreidsma@davidr-fedora ruby]$ ruby factorialDriver.rb
+To compute n!, enter n: 10
+!10 is 3628800.000000
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj04/ruby\[davidreidsma@davidr-fedora ruby]$ ruby factorialDriver.rb
+To compute n!, enter n: 21
+!21 is 51090942171709440000.000000
+kdavidreidsma@davidr-fedora:~/Programming/Calvin/cs214/proj04/ruby\[davidreidsma@davidr-fedora ruby]$ exit
+

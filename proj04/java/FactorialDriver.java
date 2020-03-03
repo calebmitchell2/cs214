@@ -18,7 +18,7 @@ public class FactorialDriver {
         int n = Integer.parseInt(scanner.next());
 
         FactorialDriver driver = new FactorialDriver();
-        System.out.printf("%d! = %f", n, driver.getFactorial(n));
+        System.out.printf("%d! = %f\n", n, driver.getFactorial(n));
     }
 
     /**

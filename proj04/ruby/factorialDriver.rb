@@ -18,5 +18,5 @@ end
 if __FILE__ == $0
   print "To compute n!, enter n: "
   n = gets.chomp.to_i
-  puts "!#{n} is #{getFactorial(n)}"
+  puts "!#{n} is %f" % getFactorial(n)
 end

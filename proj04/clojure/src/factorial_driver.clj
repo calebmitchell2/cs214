@@ -28,6 +28,7 @@
 (defn -main []
   (print "To compute n!, enter n: ") (flush)
   (let [n (read)]
-    (println (getFactorial n))
+    (printf "!%d = " n)
+    (printf "%f\n" (getFactorial n))
   )
 )
