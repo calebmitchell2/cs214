@@ -1,12 +1,74 @@
-Script started on 2020-03-12 15:44:05-0400
-[1m[7m%[27m[1m[0m                                                                                                                                            ]2;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06]1;..n/cs214/lab06[0m[27m[24m[J[01;32m➜  [36mlab06[00m [01;34mgit:([31mmaster[34m) [33m✗[00m [K[?1h=[?2004h[4mc[24m[24m[32mc[32md[39m [4ma[24m[4ma[4md[24m[4md[4ma[24m[?1l>[?2004l
-]2;cd ada]1;cd[1m[7m%[27m[1m[0m                                                                                                                                            ]2;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06/ada]1;..214/lab06/ada[0m[27m[24m[J[01;32m➜  [36mada[00m [01;34mgit:([31mmaster[34m) [33m✗[00m [K[?1h=[?2004h[32mg[39m[1m[31mg[1m[31mn[0m[39m[1m[31mg[1m[31mn[1m[31ma[0m[39m[0m[32mg[0m[32mn[0m[32ma[32mt[39m[1m[31mg[1m[31mn[1m[31ma[1m[31mt[1m[31mm[0m[39m[1m[31mm[1m[31ma[0m[39m[1m[31ma[1m[31mk[0m[39m[0m[32mg[0m[32mn[0m[32ma[0m[32mt[0m[32mm[0m[32ma[0m[32mk[32me[39m [4maverage[24m[4me[4m.[24m[4m.[4ma[24m[4ma[4md[24m[4md[4mb[24m[?1l>[?2004l
-]2;gnatmake average.adb]1;gnatmakex86_64-linux-gnu-gcc-8 -c average.adb
-x86_64-linux-gnu-gnatbind-8 -x average.ali
-x86_64-linux-gnu-gnatlink-8 average.ali
-[1m[7m%[27m[1m[0m                                                                                                                                            ]2;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06/ada]1;..214/lab06/ada[0m[27m[24m[J[01;32m➜  [36mada[00m [01;34mgit:([31mmaster[34m) [33m✗[00m [K[?1h=[?2004h[32m.[39m[39m[4m.[4m/[24m[4m.[4m/[4ma[24m[4ma[4mv[24m[4mv[4me[24m[4me[4mr[24m[4mr[4ma[24m[4ma[4mg[24m[8D[24m[32m.[24m[32m/[24m[32ma[24m[32mv[24m[32me[24m[32mr[24m[32ma[24m[32mg[32me[39m[?1l>[?2004l
-]2;./average]1;./average average 0 is  0.00000E+00
- average 1 is  7.50000E+00
-[1m[7m%[27m[1m[0m                                                                                                                                            ]2;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06/ada]1;..214/lab06/ada[0m[27m[24m[J[01;32m➜  [36mada[00m [01;34mgit:([31mmaster[34m) [33m✗[00m [K[?1h=[?2004h[?2004l
+Script started on 2020-03-12 16:00:35-0400
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/lab06[00m$ cd ada
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06/ada[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/lab06/ada[00m$ cat average.adb
+-- average.adb "test-drives" function Average.
+-- Precondition: array is an array of numbers.
+-- Output: the average of the numbers.
+--
+-- Begun by: Dr. Adams, CS 214 at Calvin College.
+-- Completed by:  David Reidsma
+-- Date:          03/12/2020
+-----------------------------------------------
 
-Script done on 2020-03-12 15:44:16-0400
+with Ada.Text_IO; use Ada.Text_IO;             -- Put(String)
+with Ada.Float_Text_IO; use Ada.Float_Text_IO; -- Put(Float)
+
+procedure average is
+
+-- Declare Vector type
+type Vector is array ( Positive range <>) of Float;
+
+-- Define array0 as an array containing no values
+array0 : Vector := (0.0, 0.0);
+
+-- Define array1 as an array containing 9, 8, 7, 6
+array1 : Vector := (9.0, 8.0, 7.0, 6.0);
+
+----------------------------------------------
+-- sum() sums the values in an array         -
+-- Receive: vec, an array of numbers         -
+-- Return: the sum of the values in vec.     -
+----------------------------------------------
+function sum(vec: Vector) return Float is 
+   Total : Float := 0.0; 
+begin 
+   -- for I in vec'Range 
+   for I in 1..vec'Length
+   loop 
+      Total := Total + vec(I); 
+   end loop; 
+   return Total; 
+end sum; 
+
+-------------------------------------------------------------------------------
+-- average() is a method that computes the average of the values in an array. -
+-- Receive: vec, an array of doubles.                                         -
+-- Return: the average of the values in vec.                                  -
+-------------------------------------------------------------------------------
+function average(vec: in Vector) return Float is
+begin
+   if vec'Length <= 0 then
+      return 0.0;
+   else
+      return sum(vec) / Float(vec'Length);
+   end if;
+end average;
+
+
+begin
+   Put(" average 0 is ");
+   Put( average(array0) );
+   New_line;
+   Put(" average 1 is ");
+   Put( average(array1) );
+   New_line;
+end average;
+
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06/ada[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/lab06/ada[00m$ gnatmake average.adb
+gnatmake: "average" up to date.
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06/ada[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/lab06/ada[00m$ ./average
+ average 0 is  0.00000E+00
+ average 1 is  7.50000E+00
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06/ada[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/lab06/ada[00m$ exit
+
+Script done on 2020-03-12 16:00:50-0400

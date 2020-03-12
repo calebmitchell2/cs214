@@ -1,43 +1,170 @@
+Script started on 2020-03-12 16:00:35-0400
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/lab06[00m$ cd ada
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06/ada[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/lab06/ada[00m$ cat average.adb
+-- average.adb "test-drives" function Average.
+-- Precondition: array is an array of numbers.
+-- Output: the average of the numbers.
+--
+-- Begun by: Dr. Adams, CS 214 at Calvin College.
+-- Completed by:  David Reidsma
+-- Date:          03/12/2020
+-----------------------------------------------
 
-[1m[7m%[27m[1m[0m                                                                                                                                           
- 
-]2;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06]1;..n/cs214/lab06
-[0m[27m[24m[J[01;32m➜  [36mlab06[00m [01;34mgit:([31mmaster[34m) [33m✗[00m [K[?1h=[?2004h[4mc[24m[24m[32mc[32md[39m [4ma[24m[4ma[4md[24m[4md[4ma[24m[?1l>[?2004l
+with Ada.Text_IO; use Ada.Text_IO;             -- Put(String)
+with Ada.Float_Text_IO; use Ada.Float_Text_IO; -- Put(Float)
 
-]2;cd ada]1;cd[1m[7m%[27m[1m[0m                                                                                                                                           
- 
-]2;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06/ada]1;..214/lab06/ada
-[0m[27m[24m[J[01;32m➜  [36mada[00m [01;34mgit:([31mmaster[34m) [33m✗[00m [K[?1h=[?2004h[32mg[39m[1m[31mg[1m[31mn[0m[39m[1m[31mg[1m[31mn[1m[31ma[0m[39m[0m[32mg[0m[32mn[0m[32ma[32mt[39m[1m[31mg[1m[31mn[1m[31ma[1m[31mt[1m[31mm[0m[39m[1m[31mm[1m[31ma[0m[39m[1m[31ma[1m[31mk[0m[39m[0m[32mg[0m[32mn[0m[32ma[0m[32mt[0m[32mm[0m[32ma[0m[32mk[32me[39m [4maverage[24m[4me[4m.[24m[4m.[4ma[24m[4ma[4md[24m[4md[4mb[24m[?1l>[?2004l
+procedure average is
 
-]2;gnatmake average.adb]1;gnatmakex86_64-linux-gnu-gcc-8 -c average.adb
-x86_64-linux-gnu-gnatbind-8 -x average.ali
-x86_64-linux-gnu-gnatlink-8 average.ali
-[1m[7m%[27m[1m[0m                                                                                                                                           
- 
-]2;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06/ada]1;..214/lab06/ada
-[0m[27m[24m[J[01;32m➜  [36mada[00m [01;34mgit:([31mmaster[34m) [33m✗[00m [K[?1h=[?2004h[32m.[39m[39m[4m.[4m/[24m[4m.[4m/[4ma[24m[4ma[4mv[24m[4mv[4me[24m[4me[4mr[24m[4mr[4ma[24m[4ma[4mg[24m[8D[24m[32m.[24m[32m/[24m[32ma[24m[32mv[24m[32me[24m[32mr[24m[32ma[24m[32mg[32me[39m[?1l>[?2004l
+-- Declare Vector type
+type Vector is array ( Positive range <>) of Float;
 
-]2;./average]1;./average average 0 is  0.00000E+00
+-- Define array0 as an array containing no values
+array0 : Vector := (0.0, 0.0);
+
+-- Define array1 as an array containing 9, 8, 7, 6
+array1 : Vector := (9.0, 8.0, 7.0, 6.0);
+
+----------------------------------------------
+-- sum() sums the values in an array         -
+-- Receive: vec, an array of numbers         -
+-- Return: the sum of the values in vec.     -
+----------------------------------------------
+function sum(vec: Vector) return Float is 
+   Total : Float := 0.0; 
+begin 
+   -- for I in vec'Range 
+   for I in 1..vec'Length
+   loop 
+      Total := Total + vec(I); 
+   end loop; 
+   return Total; 
+end sum; 
+
+-------------------------------------------------------------------------------
+-- average() is a method that computes the average of the values in an array. -
+-- Receive: vec, an array of doubles.                                         -
+-- Return: the average of the values in vec.                                  -
+-------------------------------------------------------------------------------
+function average(vec: in Vector) return Float is
+begin
+   if vec'Length <= 0 then
+      return 0.0;
+   else
+      return sum(vec) / Float(vec'Length);
+   end if;
+end average;
+
+
+begin
+   Put(" average 0 is ");
+   Put( average(array0) );
+   New_line;
+   Put(" average 1 is ");
+   Put( average(array1) );
+   New_line;
+end average;
+
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06/ada[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/lab06/ada[00m$ gnatmake average.adb
+gnatmake: "average" up to date.
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06/ada[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/lab06/ada[00m$ ./average
+ average 0 is  0.00000E+00
  average 1 is  7.50000E+00
-[1m[7m%[27m[1m[0m                                                                                                                                           
- 
-]2;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06/ada]1;..214/lab06/ada
-[0m[27m[24m[J[01;32m➜  [36mada[00m [01;34mgit:([31mmaster[34m) [33m✗[00m [K[?1h=[?2004h[?2004l
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06/ada[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/lab06/ada[00m$ exit
 
+Script done on 2020-03-12 16:00:50-0400
+Script started on 2020-03-12 16:01:33-0400
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/lab06[00m$ cd clojure
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06/clojure[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/lab06/clojure[00m$ cat src/average.clj 
+;; average.clj "test-drives" function average().
+;;
+;; Output: the average of a sequence of numbers.
+;;
+;; Usage: clojure -m average
+;;
+;; Begun by: Dr. Adams, CS 214 at Calvin College.
+;; Completed by:  David Reidsma
+;; Date:          03/12/2020
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(ns average)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; sum() sums the values in a vector.       
+;; Receive: vec, a vector of numbers.
+;; Return: the sum of the values in vec.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defn sum [vec]
+  (if (vector? vec)
+    (if (empty? vec)
+      0.0
+      (+
+        (peek vec)
+        (sum (pop vec))
+      )
+    )
+  )
+)
 
-[1m[7m%[27m[1m[0m                                                                                                                                           
- 
-]2;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06]1;..n/cs214/lab06
-[0m[27m[24m[J[01;32m➜  [36mlab06[00m [01;34mgit:([31mmaster[34m) [33m✗[00m [K[?1h=[?2004h[4mc[24m[24m[32mc[32md[39m [4mc[24m[4mc[4ml[24m[4ml[4mo[24m[4mo[4mj[24m[4mj[4mu[24m[4mu[4mr[24m[4mr[4me[24m[?1l>[?2004l
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; sum2() sums the values in a vector.       
+;; Receive: vec, a vector of numbers.
+;; Return: the sum of the values in vec.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defn sum2 [vec]
+  (if (vector? vec)
+    (if (empty? vec)
+      0.0
+      (reduce + vec)
+    )
+  )
+)
 
-]2;cd clojure]1;cd[1m[7m%[27m[1m[0m                                                                                                                                           
- 
-]2;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06/clojure]1;..lab06/clojure
-[0m[27m[24m[J[01;32m➜  [36mclojure[00m [01;34mgit:([31mmaster[34m) [33m✗[00m [K[?1h=[?2004h[1m[31mc[0m[39m[1m[31mc[1m[31ml[0m[39m[1m[31mc[1m[31ml[1m[31mo[0m[39m[1m[31mo[1m[31mj[0m[39m[1m[31mj[1m[31mu[0m[39m[1m[31mu[1m[31mr[0m[39m[0m[32mc[0m[32ml[0m[32mo[0m[32mj[0m[32mu[0m[32mr[32me[39m -m [4msrc[1m[4m/[0m[24m[4mc[24m[0m[24m [4mr[24m[24m [4ms[24m[24m [24m average[?1l>[?2004l
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; average() computes the average of a vector of numbers.
+;; Receive: vec, a vector of numbers. 
+;; Return: the average of the numbers in vec.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defn average [vec]
+  (if (vector? vec)
+    (if (empty? vec)
+      0.0
+      (/ (sum vec) (count vec))
+    )
+  )
+)
 
-]2;clojure -m average]1;clojure
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; main function to test functions sum() and average()
+;; Output: the sum and average of some test vectors.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defn -main []
+  (let
+    [ emptyVec []
+      testVec  [9.0 8.0 7.0 6.0]
+    ]
+
+    (print "\nThe empty vec: " emptyVec) 
+    (print "\nThe test  vec: " testVec) 
+    (println "\n")
+
+    ;; Test sum()...
+    (printf "\nThe first sum is %.3f\n" (sum emptyVec))
+    (printf "The second sum is %.3f\n" (sum testVec))
+
+    ;; Test average()...
+    (printf "\nThe first average is %.3f\n" (average emptyVec))
+    (printf "The second average is %.3f\n" (average testVec))
+    (println "\n")
+
+    ;; Test sum2()...
+    (printf "\nThe first sum2 is %.3f\n" (sum2 emptyVec))
+    (printf "The second sum2 is %.3f\n" (sum2 testVec))
+    (println "\n")
+  )
+)
+
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06/clojure[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/lab06/clojure[00m$ clojure -m average
+
 The empty vec:  []
 The test  vec:  [9.0 8.0 7.0 6.0]
 
@@ -54,25 +181,71 @@ The first sum2 is 0.000
 The second sum2 is 30.000
 
 
-[1m[7m%[27m[1m[0m                                                                                                                                           
- 
-]2;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06/clojure]1;..lab06/clojure
-[0m[27m[24m[J[01;32m➜  [36mclojure[00m [01;34mgit:([31mmaster[34m) [33m✗[00m [K[?1h=[?2004h[?2004l
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06/clojure[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/lab06/clojure[00m$ exit
 
+Script done on 2020-03-12 16:01:47-0400
+Script started on 2020-03-12 16:00:14-0400
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/lab06[00m$ cd java
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06/java[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/lab06/java[00m$ cat Average.java
+/* Average.java is a driver for method avg().
+ *
+ * Started by: Prof. Adams, for CS 214 at Calvin College
+ *
+ * Student Name: 	David Reidsma
+ * Date:			03/12/2020
+ *
+ * Precondition: array, is an array of double values.
+ * Output: the average of the numbers in array.
+ ***************************************************************/
 
+import java.io.*;
 
+public class Average {
+	public static void main(String[] args) {
+		double[] array0 = new double[0];
+		double[] array1 = { 9.0, 8.0, 7.0, 6.0 };
 
-[1m[7m%[27m[1m[0m                                                                                                                                           
- 
-]2;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06]1;..n/cs214/lab06
-[0m[27m[24m[J[01;32m➜  [36mlab06[00m [01;34mgit:([31mmaster[34m) [33m✗[00m [K[?1h=[?2004h[4mc[24m[24m[32mc[32md[39m [4mr[24m[4mr[4mu[24m[4mu[4mb[24m[4mb[4my[24m[?1l>[?2004l
+		// output the average of the values in the arrays
+		System.out.println("The first average is " + avg(array0));
+		System.out.println("The second average is " + avg(array1));
+	}
 
-]2;cd ruby]1;cd[1m[7m%[27m[1m[0m                                                                                                                                           
- 
-]2;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06/ruby]1;..14/lab06/ruby
-[0m[27m[24m[J[01;32m➜  [36mruby[00m [01;34mgit:([31mmaster[34m) [33m✗[00m [K[?1h=[?2004h[1m[31mc[0m[39m[1m[31mc[1m[31ma[0m[39m[0m[32mc[0m[32ma[32mt[39m [4maverage.rb[24m[1m [0m[0m [?1l>[?2004l
+	/*
+	 * sum() is a method that computes the sum of all the values in an array of doubles.
+	 * Receive: array, an array of doubles.
+	 * Return: the sum of the values in array.
+	 ************************************************************/
+	static double sum(double[] array) {
+		double total = 0.0;
+		for (int i = 0; i < array.length; i++) {
+			total += array[i];
+		}
+		return total;
+	}
 
-]2;cat average.rb]1;cat# average.rb averages the values of an array of doubles.
+	/*
+	 * avg() is a method that computes the average of the values in an array.
+	 * Receive: array, an array of doubles.
+	 * Return: the average of the values in array.
+	 **************************************************************/
+	static double avg(double array[]) {
+		if (array == null || array.length <= 0)
+			return 0.0;
+		
+		return sum(array) / array.length;
+	}
+}
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06/java[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/lab06/java[00m$ javac -deprecation Average.java 
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06/java[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/lab06/java[00m$ a[Kjava Average
+The first average is 0.0
+The second average is 7.5
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06/java[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/lab06/java[00m$ cd ..[K[K[K[K[Kexit
+
+Script done on 2020-03-12 16:00:30-0400
+Script started on 2020-03-12 16:01:19-0400
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/lab06[00m$ cd ruby
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06/ruby[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/lab06/ruby[00m$ cat average.rb 
+# average.rb averages the values of an array of doubles.
 # Precondition: array is an array of numbers
 # Output: the average of the values in array
 #
@@ -119,19 +292,11 @@ end
 
 main
 
-[1m[7m%[27m[1m[0m                                                                                                                                           
- 
-]2;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06/ruby]1;..14/lab06/ruby
-[0m[27m[24m[J[01;32m➜  [36mruby[00m [01;34mgit:([31mmaster[34m) [33m✗[00m [K[?1h=[?2004h[1m[31mc[0m[39m[1m[31mc[1m[31mu[0m[39m[1m[31mc[1m[31mu[1m[31mb[0m[39m[1m[31mc[1m[31mu[0m[39m[0m[39m [1m[31mc[0m[39m[0m[39m [0m[39m [32mr[39m[1m[31mr[1m[31mu[0m[39m[1m[31mr[1m[31mu[1m[31mb[0m[39m[0m[32mr[0m[32mu[0m[32mb[32my[39m [4maverage.rb[24m[1m [0m[0m [?1l>[?2004l
-
-]2;ruby average.rb]1;rubysum 0 is: 0.0
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06/ruby[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/lab06/ruby[00m$ ruby average.rb 
+sum 0 is: 0.0
 sum 1 is: 30.0
 average 0 is: 0.0
 average 1 is: 7.5
-[1m[7m%[27m[1m[0m                                                                                                                                           
- 
-]2;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06/ruby]1;..14/lab06/ruby
-[0m[27m[24m[J[01;32m➜  [36mruby[00m [01;34mgit:([31mmaster[34m) [33m✗[00m [K[?1h=[?2004h[?2004l
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06/ruby[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/lab06/ruby[00m$ exit
 
-
-
+Script done on 2020-03-12 16:01:27-0400

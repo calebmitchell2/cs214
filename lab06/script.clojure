@@ -1,7 +1,96 @@
-Script started on 2020-03-12 15:45:42-0400
-[1m[7m%[27m[1m[0m                                                                                                                                            ]2;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06]1;..n/cs214/lab06[0m[27m[24m[J[01;32m➜  [36mlab06[00m [01;34mgit:([31mmaster[34m) [33m✗[00m [K[?1h=[?2004h[4mc[24m[24m[32mc[32md[39m [4mc[24m[4mc[4ml[24m[4ml[4mo[24m[4mo[4mj[24m[4mj[4mu[24m[4mu[4mr[24m[4mr[4me[24m[?1l>[?2004l
-]2;cd clojure]1;cd[1m[7m%[27m[1m[0m                                                                                                                                            ]2;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06/clojure]1;..lab06/clojure[0m[27m[24m[J[01;32m➜  [36mclojure[00m [01;34mgit:([31mmaster[34m) [33m✗[00m [K[?1h=[?2004h[1m[31mc[0m[39m[1m[31mc[1m[31ml[0m[39m[1m[31mc[1m[31ml[1m[31mo[0m[39m[1m[31mo[1m[31mj[0m[39m[1m[31mj[1m[31mu[0m[39m[1m[31mu[1m[31mr[0m[39m[0m[32mc[0m[32ml[0m[32mo[0m[32mj[0m[32mu[0m[32mr[32me[39m -m [4msrc[1m[4m/[0m[24m[4mc[24m[0m[24m [4mr[24m[24m [4ms[24m[24m [24m average[?1l>[?2004l
-]2;clojure -m average]1;clojure
+Script started on 2020-03-12 16:01:33-0400
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/lab06[00m$ cd clojure
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06/clojure[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/lab06/clojure[00m$ cat src/average.clj 
+;; average.clj "test-drives" function average().
+;;
+;; Output: the average of a sequence of numbers.
+;;
+;; Usage: clojure -m average
+;;
+;; Begun by: Dr. Adams, CS 214 at Calvin College.
+;; Completed by:  David Reidsma
+;; Date:          03/12/2020
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(ns average)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; sum() sums the values in a vector.       
+;; Receive: vec, a vector of numbers.
+;; Return: the sum of the values in vec.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defn sum [vec]
+  (if (vector? vec)
+    (if (empty? vec)
+      0.0
+      (+
+        (peek vec)
+        (sum (pop vec))
+      )
+    )
+  )
+)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; sum2() sums the values in a vector.       
+;; Receive: vec, a vector of numbers.
+;; Return: the sum of the values in vec.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defn sum2 [vec]
+  (if (vector? vec)
+    (if (empty? vec)
+      0.0
+      (reduce + vec)
+    )
+  )
+)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; average() computes the average of a vector of numbers.
+;; Receive: vec, a vector of numbers. 
+;; Return: the average of the numbers in vec.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defn average [vec]
+  (if (vector? vec)
+    (if (empty? vec)
+      0.0
+      (/ (sum vec) (count vec))
+    )
+  )
+)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; main function to test functions sum() and average()
+;; Output: the sum and average of some test vectors.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defn -main []
+  (let
+    [ emptyVec []
+      testVec  [9.0 8.0 7.0 6.0]
+    ]
+
+    (print "\nThe empty vec: " emptyVec) 
+    (print "\nThe test  vec: " testVec) 
+    (println "\n")
+
+    ;; Test sum()...
+    (printf "\nThe first sum is %.3f\n" (sum emptyVec))
+    (printf "The second sum is %.3f\n" (sum testVec))
+
+    ;; Test average()...
+    (printf "\nThe first average is %.3f\n" (average emptyVec))
+    (printf "The second average is %.3f\n" (average testVec))
+    (println "\n")
+
+    ;; Test sum2()...
+    (printf "\nThe first sum2 is %.3f\n" (sum2 emptyVec))
+    (printf "The second sum2 is %.3f\n" (sum2 testVec))
+    (println "\n")
+  )
+)
+
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06/clojure[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/lab06/clojure[00m$ clojure -m average
+
 The empty vec:  []
 The test  vec:  [9.0 8.0 7.0 6.0]
 
@@ -18,6 +107,6 @@ The first sum2 is 0.000
 The second sum2 is 30.000
 
 
-[1m[7m%[27m[1m[0m                                                                                                                                            ]2;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06/clojure]1;..lab06/clojure[0m[27m[24m[J[01;32m➜  [36mclojure[00m [01;34mgit:([31mmaster[34m) [33m✗[00m [K[?1h=[?2004h[?2004l
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06/clojure[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/lab06/clojure[00m$ exit
 
-Script done on 2020-03-12 15:45:55-0400
+Script done on 2020-03-12 16:01:47-0400
