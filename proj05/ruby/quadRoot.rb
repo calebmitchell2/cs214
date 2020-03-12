@@ -17,26 +17,26 @@ def computeRoots(a, b, c)
       root2 = (-b - Math.sqrt(arg)) / (2 * a);
       return true, root1, root2
     else
-      print "b^2 - 4ac is negative!"
+      puts "b^2 - 4ac is negative!"
       return false, 0.0, 0.0
     end
   else
-    print "a is zero!"
+    puts "a is zero!"
     return false, 0.0, 0.0
   end
 end
 
 # Main function of a program that computes quadratic roots
 if __FILE__ == $0
-  puts "Enter a: "
+  print "Enter a: "
   a = gets.chomp.to_f
-  puts "Enter b: " 
+  print "Enter b: " 
   b = gets.chomp.to_f
-  puts "Enter c: "
+  print "Enter c: "
   c = gets.chomp.to_f
 
   success, root1, root2 = computeRoots(a, b, c)
   if success
-    print "#{root1}, #{root2}"
+    puts "#{root1}, #{root2}"
   end
 end

@@ -42,7 +42,7 @@
       (let [c (read)
             roots (computeRoots a b c)]
         (if (get roots 0)
-          (printf "%f, %f" (get roots 1), (get roots 2))
+          (printf "%f, %f\n" (get roots 1), (get roots 2))
         )
       )
     )

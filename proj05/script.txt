@@ -1,0 +1,270 @@
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/proj05[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/proj05[00m$ cd ada
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/proj05/ada[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/proj05/ada[00m$ cat quad_roo t.adb
+-- quad_root.adb is a driver for computeRoots.
+--
+-- Author: David Reidsma
+-- Date:   03/11/2020
+
+with Ada.Text_IO, Ada.Float_Text_IO, Ada.Numerics.Elementary_Functions;
+use  Ada.Text_IO, Ada.Float_Text_IO, Ada.Numerics.Elementary_Functions;
+
+procedure quad_root is
+    a, b, c, root1, root2 : float := 0.0;
+    success : boolean := False;
+
+    -- computeRoots computes the roots of a quadratic equation.
+    -- Input: a, a float
+    -- Input: b, a float
+    -- Input: c, a float
+    -- Input: root1, a float to store the first root
+    -- Input: root2, a float to store the second root
+    -- Output: True if successful, false if not
+    function computeRoots(a : in float; b : in float; c : in float; root1 : out float; root2 : out float) return boolean is
+        answer : float := 1.0;
+        arg : float := 0.0;
+    begin
+        if a /= 0.0 then
+            arg := (b ** 2.0) - (4.0 * a * c);
+            if arg >= 0.0 then
+                root1 := (-b + Sqrt(arg)) / (2.0 * a);
+                root2 := (-b - Sqrt(arg)) / (2.0 * a);
+                return True;
+            else
+                Put("b^2 - 4ac is negative!");
+                root1 := 0.0;
+                root2 := 0.0;
+                return False;
+            end if;
+        else
+            Put("a is zero!");
+            root1 := 0.0;
+            root2 := 0.0;
+            return False;
+        end if;
+    end computeRoots;
+
+-- Main function of a program that computes quadratic roots
+begin
+    Put("Enter a: ");
+    Get(a);
+    Put("Enter b: ");
+    Get(b);
+    Put("Enter c: ");
+    Get(c);
+
+    success := computeRoots(a, b, c, root1, root2);
+    if success then
+        Put(root1, 1, 15, 0);
+        Put(", ");
+        Put(root2, 1, 15, 0);
+    end if;
+end quad_root;
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/proj05/ada[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/proj05/ada[00m$ gnatmake qua d_root
+x86_64-linux-gnu-gcc-8 -c quad_root.adb
+x86_64-linux-gnu-gnatbind-8 -x quad_root.ali
+x86_64-linux-gnu-gnatlink-8 quad_root.ali
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/proj05/ada[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/proj05/ada[00m$ ./quad_rot
+bash: ./quad_rot: No such file or directory
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/proj05/ada[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/proj05/ada[00m$ ./quad_rotot
+Enter a: 1
+Enter b: 25
+Enter c: 25
+-1.043560981750488, -23.956439971923828
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/proj05/ada[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/proj05/ada[00m$ ./quad_root
+Enter a: 3
+Enter b: 10
+Enter c: 4
+-0.464816242456436, -2.868516921997070
+
+
+
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/proj05[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/proj05[00m$ cd clojure
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/proj05/clojure[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/proj05/clojure[00m$ cat src/ quad_root.clj
+;;;; quad_root.clj is a driver for computeRoots.
+;;;;
+;;;; Author:    David Reidsma
+;;;; Date:      03/11/2020
+
+(ns quad_root)
+
+;;; computeRoots computes the roots of a quadratic equation.
+;;; Input: a, a float
+;;; Input: b, a float
+;;; Input: c, a float
+;;; Output: A vector storing a boolean (true for success, false otherwise) and two numbers (the roots)
+(defn computeRoots [a, b, c]
+  (if (not (zero? a))
+    (let
+      [arg (- (Math/pow b 2) (* 4 a c))]
+      (if (>= arg 0)
+        (let [root1 (/ (+ (- b) (Math/sqrt arg)) (* 2 a))
+              root2 (/ (- (- b) (Math/sqrt arg)) (* 2 a))]
+          (vector true root1 root2)
+        )
+        (do
+          (println "b^2 - 4ac is negative!")
+          (vector false 0 0)
+        )
+      )
+    )
+    (do
+      (println "a is zero!")
+      (vector false 0 0)
+    )
+  )
+)
+
+;;; Main function of a program that computes quadratic roots
+(defn -main []
+  (print "Enter a: ") (flush)
+  (let [a (read)]
+    (print "Enter b: ") (flush)
+    (let [b (read)]
+      (print "Enter c: ") (flush)
+      (let [c (read)
+            roots (computeRoots a b c)]
+        (if (get roots 0)
+          (printf "%f, %f\n" (get roots 1), (get roots 2))
+        )
+      )
+    )
+  )
+)
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/proj05/clojure[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/proj05/clojure[00m$ clojure  -m quad_root
+Enter a: 1
+Enter b: 25
+Enter c: 25
+-1.043561, -23.956439
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/proj05/clojure[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/proj05/clojure[00m$ clojure --m quad_root
+Enter a: 3
+Enter b: 10
+Enter c: 4
+-0.464816, -2.868517
+
+
+
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/proj05[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/proj05[00m$ cd java
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/proj05/java[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/proj05/java[00m$ cat QuadRoo t.java
+/** 
+ * QuadRoot.java is a driver for computeRoots.
+ * Author: David Reidsma
+ * Date:   03/11/2020
+ */
+
+import java.util.Scanner;
+
+public class QuadRoot {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter a: ");
+        double a = scanner.nextDouble();
+
+        System.out.print("Enter b: ");
+        double b = scanner.nextDouble();
+
+        System.out.print("Enter c: ");
+        double c = scanner.nextDouble();
+
+        double[] roots = new double[2];
+        if (computeRoots(a, b, c, roots))
+            System.out.printf("%f, %f\n", roots[0], roots[1]);
+
+        scanner.close();
+    }
+
+    /**
+     * computeRoots computes the roots of a quadratic equation.
+     * @param a The a variable
+     * @param b The b variable
+     * @param c The c variable
+     * @param roots An array to store the two roots
+     * @return True if successful, false if not
+     */
+    static boolean computeRoots(double a, double b, double c, double[] roots) {
+        if (a != 0) {
+            double arg = Math.pow(b, 2.0) - 4 * a * c;
+            if (arg >= 0) {
+               roots[0] = (-b + Math.sqrt(arg)) / (2 * a);
+               roots[1] = (-b - Math.sqrt(arg)) / (2 * a);
+               return true;
+            } else {
+               System.out.println("b^2 - 4ac is negative!");
+               roots[0] = roots[1] = 0.0;
+               return false;
+            }
+         } else {
+            System.out.println("a is zero!");
+            roots[0] = roots[1] = 0.0;
+            return false;
+         }
+    }
+}
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/proj05/java[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/proj05/java[00m$ javac -depr ecation J[KJ[KQuadRoot.java
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/proj05/java[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/proj05/java[00m$ java QuadRo ot
+Enter a: 1
+Enter b: 25
+Enter c: 25
+-1.043561, -23.956439
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/proj05/java[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/proj05/java[00m$ java QuadRooot
+Enter a: 3
+Enter b: 10
+Enter c: 4
+-0.464816, -2.868517
+
+
+
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/proj05[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/proj05[00m$ cd ruby
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/proj05/ruby[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/proj05/ruby[00m$ cat quadRoot.rb
+#! /usr/bin/ruby
+# quadRoot.rb is a driver for computeRoots.
+#
+# Author: David Reidsma
+# Date:   03/11/2020
+
+# computeRoots computes the roots of a quadratic equation.
+# Input: a, a float
+# Input: b, a float
+# Input: c, a float
+# Output: A tuple storing a boolean (true for success, false otherwise) and two numbers (the roots)
+def computeRoots(a, b, c)
+  if a != 0
+    arg = (b ** 2.0) - (4 * a * c)
+    if arg >= 0
+      root1 = (-b + Math.sqrt(arg)) / (2 * a);
+      root2 = (-b - Math.sqrt(arg)) / (2 * a);
+      return true, root1, root2
+    else
+      puts "b^2 - 4ac is negative!"
+      return false, 0.0, 0.0
+    end
+  else
+    puts "a is zero!"
+    return false, 0.0, 0.0
+  end
+end
+
+# Main function of a program that computes quadratic roots
+if __FILE__ == $0
+  print "Enter a: "
+  a = gets.chomp.to_f
+  print "Enter b: " 
+  b = gets.chomp.to_f
+  print "Enter c: "
+  c = gets.chomp.to_f
+
+  success, root1, root2 = computeRoots(a, b, c)
+  if success
+    puts "#{root1}, #{root2}"
+  end
+end
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/proj05/ruby[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/proj05/ruby[00m$ ruby quadRo ot.rb
+Enter a: 1
+Enter b: 25
+Enter c: 25
+-1.0435607626104009, -23.9564392373896
+]0;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/proj05/ruby[01;32mdavid@david-ThinkPad-P52s[00m:[01;34m~/Programming/Calvin/cs214/proj05/ruby[00m$ ruby quadRooot.rb
+Enter a: 3
+Enter b: 10
+Enter c: 4
+-0.4648162415120036, -2.86851709182133

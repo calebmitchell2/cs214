@@ -1,5 +1,5 @@
 /** 
- * quad_root.java is a driver for computeRoots.
+ * QuadRoot.java is a driver for computeRoots.
  * Author: David Reidsma
  * Date:   03/11/2020
  */
@@ -21,16 +21,16 @@ public class QuadRoot {
 
         double[] roots = new double[2];
         if (computeRoots(a, b, c, roots))
-            System.out.printf("%f, %f", roots[0], roots[1]);
+            System.out.printf("%f, %f\n", roots[0], roots[1]);
 
         scanner.close();
     }
 
     /**
      * computeRoots computes the roots of a quadratic equation.
-     * @param a
-     * @param b
-     * @param c
+     * @param a The a variable
+     * @param b The b variable
+     * @param c The c variable
      * @param roots An array to store the two roots
      * @return True if successful, false if not
      */
