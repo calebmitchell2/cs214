@@ -10,7 +10,7 @@ procedure quad_root is
     a, b, c, root1, root2 : float := 0.0;
     success : boolean := False;
 
-    -- computeRoots computes the roots of a quadratic equation
+    -- computeRoots computes the roots of a quadratic equation.
     -- Input: a, a float
     -- Input: b, a float
     -- Input: c, a float
