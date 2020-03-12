@@ -1,0 +1,23 @@
+Script started on 2020-03-12 15:45:42-0400
+[1m[7m%[27m[1m[0m                                                                                                                                            ]2;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06]1;..n/cs214/lab06[0m[27m[24m[J[01;32m➜  [36mlab06[00m [01;34mgit:([31mmaster[34m) [33m✗[00m [K[?1h=[?2004h[4mc[24m[24m[32mc[32md[39m [4mc[24m[4mc[4ml[24m[4ml[4mo[24m[4mo[4mj[24m[4mj[4mu[24m[4mu[4mr[24m[4mr[4me[24m[?1l>[?2004l
+]2;cd clojure]1;cd[1m[7m%[27m[1m[0m                                                                                                                                            ]2;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06/clojure]1;..lab06/clojure[0m[27m[24m[J[01;32m➜  [36mclojure[00m [01;34mgit:([31mmaster[34m) [33m✗[00m [K[?1h=[?2004h[1m[31mc[0m[39m[1m[31mc[1m[31ml[0m[39m[1m[31mc[1m[31ml[1m[31mo[0m[39m[1m[31mo[1m[31mj[0m[39m[1m[31mj[1m[31mu[0m[39m[1m[31mu[1m[31mr[0m[39m[0m[32mc[0m[32ml[0m[32mo[0m[32mj[0m[32mu[0m[32mr[32me[39m -m [4msrc[1m[4m/[0m[24m[4mc[24m[0m[24m [4mr[24m[24m [4ms[24m[24m [24m average[?1l>[?2004l
+]2;clojure -m average]1;clojure
+The empty vec:  []
+The test  vec:  [9.0 8.0 7.0 6.0]
+
+
+The first sum is 0.000
+The second sum is 30.000
+
+The first average is 0.000
+The second average is 7.500
+
+
+
+The first sum2 is 0.000
+The second sum2 is 30.000
+
+
+[1m[7m%[27m[1m[0m                                                                                                                                            ]2;david@david-ThinkPad-P52s: ~/Programming/Calvin/cs214/lab06/clojure]1;..lab06/clojure[0m[27m[24m[J[01;32m➜  [36mclojure[00m [01;34mgit:([31mmaster[34m) [33m✗[00m [K[?1h=[?2004h[?2004l
+
+Script done on 2020-03-12 15:45:55-0400

@@ -17,18 +17,30 @@
 ;; Return: the sum of the values in vec.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defn sum [vec]
-  (if (empty? vec)
-    0
-    (let [index (dec (count vec))]
+  (if (vector? vec)
+    (if (empty? vec)
+      0.0
       (+
-        (get vec index)
-        (sum (subvec vec 0 index))
+        (peek vec)
+        (sum (pop vec))
       )
     )
   )
 )
 
-;; Replace this line with the definition of sum2()
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; sum2() sums the values in a vector.       
+;; Receive: vec, a vector of numbers.
+;; Return: the sum of the values in vec.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defn sum2 [vec]
+  (if (vector? vec)
+    (if (empty? vec)
+      0.0
+      (reduce + vec)
+    )
+  )
+)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; average() computes the average of a vector of numbers.
@@ -68,8 +80,8 @@
     (println "\n")
 
     ;; Test sum2()...
-    ;(printf "\nThe first sum2 is %.3f\n" (sum2 emptyVec))
-    ;(printf "The second sum2 is %.3f\n" (sum2 testVec))
+    (printf "\nThe first sum2 is %.3f\n" (sum2 emptyVec))
+    (printf "The second sum2 is %.3f\n" (sum2 testVec))
     (println "\n")
   )
 )
