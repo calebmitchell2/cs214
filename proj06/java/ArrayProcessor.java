@@ -17,7 +17,6 @@ public class ArrayProcessor {
         int arraySize = Integer.parseInt(scanner.next());
         double[] array = new double[arraySize];
 
-        ArrayProcessor processor = new ArrayProcessor();
         readArray(scanner, array);
         printArray(array);
         System.out.println();
