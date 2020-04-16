@@ -9,19 +9,37 @@ procedure Temperature_Tester is
    Start: Temperature_Package.Temperature;
    Start_Scale: Character;
    Stop: Temperature_Package.Temperature;
+   Step_String: String(1 .. 20);
    Step: Float;
    Error: Boolean := False;
    Current: Temperature_Package.Temperature;
 begin
+   Put("Temperature examples:"); New_Line;
+   Put("20.5 C"); New_Line;
+   Put("10 K"); New_Line;
+   Put("35.1 F"); New_Line;
    Put("Enter a start temperature: ");
    Start := Temperature_Package.Read_Temp(Error);
+   while Error loop
+      Put("Invalid input, try again: ");
+      Start := Temperature_Package.Read_Temp(Error);
+   end loop;
+   
    Start_Scale := Temperature_Package.Get_Scale(Start);
    
    Put("Enter a stop temperature: ");
    Stop := Temperature_Package.Read_Temp(Error);
+   while Error loop
+      Put("Invalid input, try again: ");
+      Stop := Temperature_Package.Read_Temp(Error);
+   end loop;
    
    Put("Enter a step amount of degrees (in the same scale as your start temperature): ");
-   Get(Step);
+   Step := Temperature_Package.Read_Degrees(Error);
+   while Error loop
+      Put("Invalid input, try again: ");
+      Step := Temperature_Package.Read_Degrees(Error);
+   end loop;
    
    if Temperature_Package.Equals(Start, Stop) then
       Put("Start and stop temperatures are already equal.");

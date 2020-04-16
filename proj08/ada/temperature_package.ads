@@ -39,6 +39,10 @@ package Temperature_Package is
    -- Output: true if an error occurs, or false if not, outputted to the Error parameter.
    -- Returns: a Temperature.
    function Read_Temp(Error: out Boolean) return Temperature;
+   -- Read a number of degrees in from the terminal.
+   -- Output: true if an error occurs, or false if not, outputted to the Error parameter.
+   -- Returns: a Float.
+   function Read_Degrees(Error: out Boolean) return Float;
    -- Print a Temperature to the terminal.
    -- Precondition: the Temperature has been initialized.
    -- Input: Temp, a Temperature.

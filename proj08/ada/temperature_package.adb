@@ -95,11 +95,11 @@ package body Temperature_Package is
    end To_Fahrenheit;
    
    -- Read a Temperature in from the terminal.
+   -- Input: Error, a Boolean; true if error occured, false otherwise.
    -- Output: true if an error occurs, or false if not, outputted to the Error parameter.
    -- Returns: a Temperature.
    function Read_Temp(Error: out Boolean) return Temperature is
-      SIZE: constant Integer := 10;
-      Line: String(1 .. 10);
+      Line: String(1 .. 20);
       Last_Index: Natural;
       Value: Float;
       Scale: Character;
@@ -107,11 +107,16 @@ package body Temperature_Package is
    begin
       Get_Line(Line, Last_Index);
       
-      Value := Float'Value(Line(Line'First .. Last_Index - 2));
-      Scale := Line(Last_Index);
+      begin
+	 Value := Float'Value(Line(Line'First .. Last_Index - 2));
+      exception
+	 when Constraint_Error =>
+	    Error := True;
+	    return Temp;
+      end;
       
-      if not Is_Scale_Valid(Scale) then
-	 Put("Invalid scale entered. Options are: K,k,F,f,C,c"); New_Line;
+      Scale := Line(Last_Index);
+      if not Is_Scale_Valid(Scale) Then
 	 Error := True;
 	 return Temp;
       end if;
@@ -119,11 +124,27 @@ package body Temperature_Package is
       Error := False;
       Init(Temp, Value, Scale);
       return Temp;
-   exception
-      when Constraint_Error =>
-         Error := True;
-	 return Temp;
    end Read_Temp;
+   
+   -- Read a number of degrees in from the terminal.
+   -- Output: true if an error occurs, or false if not, outputted to the Error parameter.
+   -- Returns: a Float.
+   function Read_Degrees(Error: out Boolean) return Float is
+      Line: String(1 .. 20);
+      Last_Index: Natural;
+      Value: Float;
+   begin
+      Get_Line(Line, Last_Index);
+      
+      begin
+	 Value := Float'Value(Line(Line'First .. Last_Index));
+      exception
+	 when Constraint_Error =>
+	    Error := True;
+	    return Value;
+      end;
+      return Value;
+   end;
    
    -- Print a Temperature to the terminal.
    -- Precondition: the Temperature has been initialized.
