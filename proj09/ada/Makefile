@@ -1,5 +1,5 @@
 # Makefile for GNAT (Ada) compilation
-TARGET = max
+TARGET = list_tester
 PACKAGE = list_package
 
 CC = gcc
@@ -7,7 +7,7 @@ CFLAGS = -c -Wall
 
 $(TARGET): $(TARGET).ali $(PACKAGE).o
 	gnatbind $(BFLAGS) $(TARGET).ali
-	gnatlink $(LFLAGS) $(TARGET).ali -o adaMax
+	gnatlink $(LFLAGS) $(TARGET).ali -o list_tester
 
 $(TARGET).ali: $(TARGET).adb $(PACKAGE).ads
 	$(CC) $(CFLAGS) $(TARGET).adb

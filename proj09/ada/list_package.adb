@@ -2,7 +2,7 @@
 --
 -- Begun by: Dr. Adams, CS 214 at Calvin College.
 -- Completed by: David Reidsma
--- Date: 04/16/2020
+-- Date: 04/22/2020
 -------------------------------------------------------
 
 with Ada.Text_IO, Ada.Integer_Text_IO;
@@ -98,5 +98,28 @@ package body List_Package is
      end loop;
      return Max_Value;
   end Max;
+  
+  
+   ------------------------------------------------------
+   -- Search for an integer in a list.                  -
+   -- Receive: A_List, a List.                          -
+   --          Value, an Integer.                       -
+   -- Return: the index of the value in the list or -1. -
+   --                                                   -
+   -- The index returned will be 1-based, not 0-based.  -
+   ------------------------------------------------------
+  function Search(A_List: in List; Value: in Integer) return Integer is
+     Temp_Ptr: Node_Ptr := A_List.Its_First;
+     Index: Integer := 1;
+  begin
+     while Temp_Ptr /= null loop
+	if Temp_Ptr.Its_Value = Value then
+	   return Index;
+	end if;
+	Index := Index + 1;
+	Temp_Ptr := Temp_Ptr.Its_Next;
+     end loop;
+     return -1;
+  end Search;
 end List_Package;
 

@@ -2,7 +2,7 @@
 --
 -- Begun by: Dr. Adams, CS 214 at Calvin College.
 -- Completed by: David Reidsma
--- Date: 04/16/2020
+-- Date: 04/22/2020
 ------------------------------------------------------------------
 
 package List_Package is
@@ -57,6 +57,14 @@ package List_Package is
    -- Return: the maximum value in aList.-
    ---------------------------------------
    function Max(A_List: in List) return Integer;
+   
+   ------------------------------------------------------
+   -- Search for an integer in a list.                  -
+   -- Receive: A_List, a List.                          -
+   --          Value, an Integer.                       -
+   -- Return: the index of the value in the list or -1. -
+   ------------------------------------------------------
+   function Search(A_List: in List; Value: in Integer) return Integer;
 
 private
    type List_Node;

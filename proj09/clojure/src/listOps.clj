@@ -2,7 +2,7 @@
 ;;
 ;; Begun by: Prof. Adams, CS 214 at Calvin College.
 ;; Completed by: David Reidsma
-;; Date: 04/17/2020
+;; Date: 04/22/2020
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -41,3 +41,22 @@
     (if (empty? aList)      ;  if aList is empty:
       nil                   ;    nil
       (apply max aList))))  ;  else apply max to the items in aList
+
+;; searchListRecur is a recursive function for finding the index of a value in a list.
+;; Receive: list, a list of values.
+;;          value, a value to search for.
+;;          index, an integer increased in each repetition
+;; Return: the index of the value in the list or -1
+(defn searchListRecur [list value index]
+  (if (empty? list)
+    -1
+    (if (= value (first list))
+      index
+      (recur (rest list) value (inc index)))))
+
+;; searchList is a function for finding the index of a value in a list.
+;; Receive: list, a list of values.
+;;          value, a value to search for.
+;; Return: the index of the value in the list or -1
+(defn searchList [list value]
+  (searchListRecur list value 0))

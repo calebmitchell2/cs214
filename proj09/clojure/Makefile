@@ -1,3 +1,3 @@
 all:
-	clojure -m max
+	clojure -m listTester
 

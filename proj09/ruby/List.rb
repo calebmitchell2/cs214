@@ -2,7 +2,7 @@
 #
 # Begun by: Dr. Adams, for CS 214 at Calvin College.
 # Completed by: David Reidsma
-# Date: 04/16/2020
+# Date: 04/22/2020
 #######################################################
 
 require 'test/unit/assertions'
@@ -69,6 +69,22 @@ class List
     return max_value
   end
 
+  # Search for a value in this list.
+  # Receive: value, the item to be searched for
+  # Return: the index of the value in this list or -1.
+  def search(value)
+    temp = @first
+    index = 0
+    while !temp.nil?
+      if temp.value == value
+        return index
+      end
+      temp = temp.next
+      index += 1
+    end
+    return -1
+  end
+    
   # Replace this line with a declaration for class Node
   #  (and its methods)
   class Node
