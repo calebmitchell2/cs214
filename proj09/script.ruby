@@ -139,18 +139,7 @@ puts "Index of 99 in list3: #{list3.search(99)}"
 list4.print
 puts
 puts "Index of 99 in list4: #{list4.search(99)}"
-]0;david@davidreidsma:~/Programming/Calvin/cs214/proj09/ruby[david@davidreidsma ruby]$ ruby list_tester[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K/opt/bin/[K[K[K[Kruby2.6/bin/ruby [K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kruby listTester.rb
-[1mTraceback[m (most recent call last):
-ruby: [1mNo such file or directory -- listTester.rb ([1;4mLoadError[m[1m)[m
 ]0;david@davidreidsma:~/Programming/Calvin/cs214/proj09/ruby[david@davidreidsma ruby]$ ruby list_tester.rb
-[1mTraceback[m (most recent call last):
-	5: from list_tester.rb:7:in `<main>'
-	4: from /usr/lib/ruby/2.7.0/rubygems/core_ext/kernel_require.rb:92:in `require'
-	3: from /usr/lib/ruby/2.7.0/rubygems/core_ext/kernel_require.rb:92:in `require'
-	2: from /home/david/Programming/Calvin/cs214/proj09/ruby/List.rb:8:in `<top (required)>'
-	1: from /usr/lib/ruby/2.7.0/rubygems/core_ext/kernel_require.rb:92:in `require'
-/usr/lib/ruby/2.7.0/rubygems/core_ext/kernel_require.rb:92:in `require': [1mcannot load such file -- test/unit/assertions ([1;4mLoadError[m[1m)[m
-]0;david@davidreidsma:~/Programming/Calvin/cs214/proj09/ruby[david@davidreidsma ruby]$ /opt/ruby2.6/bin/ruby list_te ster.rb
 99 88 77 66 55 
 Maximum of list1: 99
 Index of 99 in list1: 0
