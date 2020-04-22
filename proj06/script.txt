@@ -1,4 +1,59 @@
+Script started on 2020-04-22 16:45:53-04:00 [TERM="xterm-kitty" TTY="/dev/pts/3" COLUMNS="94" LINES="51"]
 ]0;david@davidreidsma:~/Programming/Calvin/cs214/proj06[david@davidreidsma proj06]$ cd ada
+]0;david@davidreidsma:~/Programming/Calvin/cs214/proj06/ada[david@davidreidsma ada]$ ls
+[0m[01;32marray_processor[0m  array_processor.adb  array_processor.ali  array_processor.o
+]0;david@davidreidsma:~/Programming/Calvin/cs214/proj06/ada[david@davidreidsma ada]$ cat array_processor.adb
+-- array_processor.adb is a program that reads in and prints out an array.
+--
+-- Author: David Reidsma
+-- Date:   03/18/2020
+
+with Ada.Text_IO, Ada.Integer_Text_IO, Ada.Float_Text_IO;
+use  Ada.Text_IO, Ada.Integer_Text_IO, Ada.Float_Text_IO;
+
+procedure array_processor is
+    type Vector is array (Positive range <>) of Float;
+    arraySize : integer := 0;
+
+    -- readArray reads in an array.
+    -- Input: arr, an array to fill with values
+    procedure readArray(arr: in out Vector) is
+        inputValue: float := 0.0;
+    begin
+        for i in 1..arr'Length
+        loop
+            Put("Enter value #");
+            Put(i, Width => 1);
+            Put(": ");
+            
+            Get(inputValue);
+            arr(i) := inputValue;
+        end loop;
+    end readArray;
+
+    -- printArray prints out the values of an array.
+    -- Input: arr, an array to print
+    procedure printArray(arr: in Vector) is
+    begin
+        for i in 1..arr'Length
+        loop
+            Put(arr(i), 1, 4, 0);
+            Put(" ");
+        end loop;
+    end printArray;
+
+-- Main function of a program that reads in an array from the user and prints it back out
+begin
+    Put("Enter an array size: ");
+    Get(arraySize);
+
+    declare
+       arr: Vector (1..arraySize);
+    begin
+        readArray(arr);
+        printArray(arr);
+    end;
+end array_processor;
 ]0;david@davidreidsma:~/Programming/Calvin/cs214/proj06/ada[david@davidreidsma ada]$ gnatmake array_processor.adb
 gcc -c array_processor.adb
 gnatbind -x array_processor.ali
@@ -9,61 +64,57 @@ Enter value #1: 44.2
 Enter value #2: -1
 Enter value #3: 5.6
 44.2000 -1.0000 5.6000 
+]0;david@davidreidsma:~/Programming/Calvin/cs214/proj06/ada[david@davidreidsma ada]$ cd ..
+]0;david@davidreidsma:~/Programming/Calvin/cs214/proj06[david@davidreidsma proj06]$ cd ruby
+]0;david@davidreidsma:~/Programming/Calvin/cs214/proj06/ruby[david@davidreidsma ruby]$ ls
+array_processor.rb
+]0;david@davidreidsma:~/Programming/Calvin/cs214/proj06/ruby[david@davidreidsma ruby]$ cat array_processor.rb
+#! /usr/bin/ruby
+# array_processor.rb is a program that reads in and prints out an array.
+#
+# Author: David Reidsma
+# Date:   03/18/2020
 
+# read_array reads in an array.
+# Input: arr, an array to fill with values
+def read_array(array)
+  for i in 0..array.size - 1 do
+    print "Enter value ##{ i + 1 }: "
+    array[i] = gets.chomp.to_f
+  end
+end
 
+# print_array prints out the values of an array.
+# Input: arr, an array to print
+def print_array(array)
+  for i in 0..array.size - 1 do
+    print "#{array[i]} "
+  end
+end
 
-
-]0;david@davidreidsma:~/Programming/Calvin/cs214/proj06[david@davidreidsma proj06]$ cd clojure
-]0;david@davidreidsma:~/Programming/Calvin/cs214/proj06/clojure[david@davidreidsma clojure]$ cat src/vector_processor.clj 
-;;;; vector_processor.clj is a program that reads in and prints out an vector.
-;;;;
-;;;; Author:    David Reidsma
-;;;; Date:      03/18/2020
-
-(ns vector_processor)
-
-;;; read-vector reads in an vector.
-;;; Input: size, an integer that is the target size of the vector
-;;; Input: vec, a vector to add {n} values to
-;;; Output: a vector containing {n} values
-(defn read-vector [size]
-  (loop [ num 1
-          vec []]
-    (if (= (count vec) size)
-      vec
-      (do
-        (printf "Enter value #%d: " num) (flush)
-        (recur (inc num) (conj vec (float(read))))))))
-
-;;; print-vec prints out an vec.
-;;; Input: vec, a vector to print out
-(defn print-vector [vec]
-  (if (seq vec)
-    (do
-      (printf "%f " (get vec 0))
-      (recur (subvec vec 1)))))
-
-;;; Main function of a program that reads in an vector from the user and prints it back out
-(defn -main []
-  (print "Enter an vector size: ") (flush)
-  (let
-    [ vector-size (read)
-      vec (read-vector vector-size)]
-    (do
-    (print-vector vec)
-    (println))))
-]0;david@davidreidsma:~/Programming/Calvin/cs214/proj06/clojure[david@davidreidsma clojure]$ clojure -m arra[K[K[K[Kvector_processor
-Enter an vector size: 3
+# Main function of a program that reads in an array from the user and prints it back out
+if __FILE__ == $0
+  print "Enter an array size: ";
+  array_size = gets.chomp.to_i
+  array = Array.new(array_size)
+  read_array(array)
+  print_array(array)
+  puts ""
+end
+]0;david@davidreidsma:~/Programming/Calvin/cs214/proj06/ruby[david@davidreidsma ruby]$ ruby array_processor
+[1mTraceback[m (most recent call last):
+ruby: [1mNo such file or directory -- array_processor ([1;4mLoadError[m[1m)[m
+]0;david@davidreidsma:~/Programming/Calvin/cs214/proj06/ruby[david@davidreidsma ruby]$ ruby array_processor.rb
+Enter an array size: 3
 Enter value #1: 44.2
 Enter value #2: -1
 Enter value #3: 5.6
-44.200001 -1.000000 5.600000 
-
-
-
-
+44.2 -1.0 5.6 
+]0;david@davidreidsma:~/Programming/Calvin/cs214/proj06/ruby[david@davidreidsma ruby]$ cd ..
 ]0;david@davidreidsma:~/Programming/Calvin/cs214/proj06[david@davidreidsma proj06]$ cd java
-]0;david@davidreidsma:~/Programming/Calvin/cs214/proj06/java[david@davidreidsma java]$ cat ArrayProcessor.java
+]0;david@davidreidsma:~/Programming/Calvin/cs214/proj06/java[david@davidreidsma java]$ ls
+ArrayProcessor.class  ArrayProcessor.java
+]0;david@davidreidsma:~/Programming/Calvin/cs214/proj06/java[david@davidreidsma java]$ ja[K[Kcat ArrayProcessor.java
 /**
  * ArrayProcessor.java is a program that reads in and prints out an array.
  *
@@ -110,22 +161,62 @@ public class ArrayProcessor {
         }
     }
 }
-]0;david@davidreidsma:~/Programming/Calvin/cs214/proj06/java[david@davidreidsma java]$ javac -deprecation ArrayProcessor.java
-]0;david@davidreidsma:~/Programming/Calvin/cs214/proj06/java[david@davidreidsma java]$ java Arar[K[KrayProcessor
+]0;david@davidreidsma:~/Programming/Calvin/cs214/proj06/java[david@davidreidsma java]$ javac -deprecation J[KArrayProcessor.java
+]0;david@davidreidsma:~/Programming/Calvin/cs214/proj06/java[david@davidreidsma java]$ java ArrayProcessor
 Enter an array size: 3
 Enter value #1: 44.2
 Enter value #2: -1
 Enter value #3: 5.6
 44.200000 -1.000000 5.600000 
+]0;david@davidreidsma:~/Programming/Calvin/cs214/proj06/java[david@davidreidsma java]$ cd ..
+]0;david@davidreidsma:~/Programming/Calvin/cs214/proj06[david@davidreidsma proj06]$ cd clojure
+]0;david@davidreidsma:~/Programming/Calvin/cs214/proj06/clojure[david@davidreidsma clojure]$ ls src
+vector_processor.clj
+]0;david@davidreidsma:~/Programming/Calvin/cs214/proj06/clojure[david@davidreidsma clojure]$ cat src/vector_processor.clj 
+;;;; vector_processor.clj is a program that reads in and prints out an vector.
+;;;;
+;;;; Author:    David Reidsma
+;;;; Date:      03/18/2020
 
+(ns vector_processor)
 
+;;; read-vector reads in an vector.
+;;; Input: size, an integer that is the target size of the vector
+;;; Input: vec, a vector to add {n} values to
+;;; Output: a vector containing {n} values
+(defn read-vector [size]
+  (loop [ num 1
+          vec []]
+    (if (= (count vec) size)
+      vec
+      (do
+        (printf "Enter value #%d: " num) (flush)
+        (recur (inc num) (conj vec (float(read))))))))
 
+;;; print-vec prints out an vec.
+;;; Input: vec, a vector to print out
+(defn print-vector [vec]
+  (if (seq vec)
+    (do
+      (printf "%f " (get vec 0))
+      (recur (subvec vec 1)))))
 
-]0;david@davidreidsma:~/Programming/Calvin/cs214/proj06[david@davidreidsma proj06]$ cd ruby
-]0;david@davidreidsma:~/Programming/Calvin/cs214/proj06/ruby[david@davidreidsma ruby]$ ruby array_processor.rb 
-Enter an array size: 3
+;;; Main function of a program that reads in an vector from the user and prints it back out
+(defn -main []
+  (print "Enter an vector size: ") (flush)
+  (let
+    [ vector-size (read)
+      vec (read-vector vector-size)]
+    (do
+    (print-vector vec)
+    (println))))
+]0;david@davidreidsma:~/Programming/Calvin/cs214/proj06/clojure[david@davidreidsma clojure]$ clojure -m vector_processor
+Enter an vector size: 3
 Enter value #1: 44.2
-Enter value #2: -2 1
+Enter value #2: -1
 Enter value #3: 5.6
-44.2 -1.0 5.6 
+44.200001 -1.000000 5.600000 
+]0;david@davidreidsma:~/Programming/Calvin/cs214/proj06/clojure[david@davidreidsma clojure]$ cd ..
+]0;david@davidreidsma:~/Programming/Calvin/cs214/proj06[david@davidreidsma proj06]$ exit
 
+Script done on 2020-04-22 16:48:22-04:00 [COMMAND_EXIT_CODE="0"]

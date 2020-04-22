@@ -1,0 +1,131 @@
+]0;david@davidreidsma:~/Programming/Calvin/cs214/proj06[david@davidreidsma proj06]$ cd ada
+]0;david@davidreidsma:~/Programming/Calvin/cs214/proj06/ada[david@davidreidsma ada]$ gnatmake array_processor.adb
+gcc -c array_processor.adb
+gnatbind -x array_processor.ali
+gnatlink array_processor.ali
+]0;david@davidreidsma:~/Programming/Calvin/cs214/proj06/ada[david@davidreidsma ada]$ ./array_processor 
+Enter an array size: 3
+Enter value #1: 44.2
+Enter value #2: -1
+Enter value #3: 5.6
+44.2000 -1.0000 5.6000 
+
+
+
+
+]0;david@davidreidsma:~/Programming/Calvin/cs214/proj06[david@davidreidsma proj06]$ cd clojure
+]0;david@davidreidsma:~/Programming/Calvin/cs214/proj06/clojure[david@davidreidsma clojure]$ cat src/vector_processor.clj 
+;;;; vector_processor.clj is a program that reads in and prints out an vector.
+;;;;
+;;;; Author:    David Reidsma
+;;;; Date:      03/18/2020
+
+(ns vector_processor)
+
+;;; read-vector reads in an vector.
+;;; Input: size, an integer that is the target size of the vector
+;;; Input: vec, a vector to add {n} values to
+;;; Output: a vector containing {n} values
+(defn read-vector [size]
+  (loop [ num 1
+          vec []]
+    (if (= (count vec) size)
+      vec
+      (do
+        (printf "Enter value #%d: " num) (flush)
+        (recur (inc num) (conj vec (float(read))))))))
+
+;;; print-vec prints out an vec.
+;;; Input: vec, a vector to print out
+(defn print-vector [vec]
+  (if (seq vec)
+    (do
+      (printf "%f " (get vec 0))
+      (recur (subvec vec 1)))))
+
+;;; Main function of a program that reads in an vector from the user and prints it back out
+(defn -main []
+  (print "Enter an vector size: ") (flush)
+  (let
+    [ vector-size (read)
+      vec (read-vector vector-size)]
+    (do
+    (print-vector vec)
+    (println))))
+]0;david@davidreidsma:~/Programming/Calvin/cs214/proj06/clojure[david@davidreidsma clojure]$ clojure -m arra[K[K[K[Kvector_processor
+Enter an vector size: 3
+Enter value #1: 44.2
+Enter value #2: -1
+Enter value #3: 5.6
+44.200001 -1.000000 5.600000 
+
+
+
+
+]0;david@davidreidsma:~/Programming/Calvin/cs214/proj06[david@davidreidsma proj06]$ cd java
+]0;david@davidreidsma:~/Programming/Calvin/cs214/proj06/java[david@davidreidsma java]$ cat ArrayProcessor.java
+/**
+ * ArrayProcessor.java is a program that reads in and prints out an array.
+ *
+ * Author: David Reidsma
+ * Date:   03/18/2020
+ */
+import java.util.Scanner;
+
+public class ArrayProcessor {
+    /**
+     * Main function of a program that reads in an array from the user and prints it back out
+     */
+    public static void main(String[] args) {
+        System.out.print("Enter an array size: ");
+
+        Scanner scanner = new Scanner(System.in);
+        int arraySize = Integer.parseInt(scanner.next());
+        double[] array = new double[arraySize];
+
+        readArray(scanner, array);
+        printArray(array);
+        System.out.println();
+    }
+
+    /**
+     * readArray reads in values to an array.
+     * @param scanner A scanner to get values from
+     * @param array An array to fill
+     */
+    static void readArray(Scanner scanner, double[] array) {
+        for (int i = 0; i < array.length; i++) {
+            System.out.printf("Enter value #%d: ", i + 1);
+            array[i] = Double.parseDouble(scanner.next());
+        }
+    }
+
+    /**
+     * printArray prints out the values of an array.
+     * @param array An array to print
+     */
+    static void printArray(double[] array) {
+        for (int i = 0; i < array.length; i++) {
+            System.out.printf("%f ", array[i]);
+        }
+    }
+}
+]0;david@davidreidsma:~/Programming/Calvin/cs214/proj06/java[david@davidreidsma java]$ javac -deprecation ArrayProcessor.java
+]0;david@davidreidsma:~/Programming/Calvin/cs214/proj06/java[david@davidreidsma java]$ java Arar[K[KrayProcessor
+Enter an array size: 3
+Enter value #1: 44.2
+Enter value #2: -1
+Enter value #3: 5.6
+44.200000 -1.000000 5.600000 
+
+
+
+
+]0;david@davidreidsma:~/Programming/Calvin/cs214/proj06[david@davidreidsma proj06]$ cd ruby
+]0;david@davidreidsma:~/Programming/Calvin/cs214/proj06/ruby[david@davidreidsma ruby]$ ruby array_processor.rb 
+Enter an array size: 3
+Enter value #1: 44.2
+Enter value #2: -2 1
+Enter value #3: 5.6
+44.2 -1.0 5.6 
+
