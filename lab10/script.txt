@@ -1,0 +1,961 @@
+Script started on 2020-04-25 02:04:36-04:00 [TERM="xterm-kitty" TTY="/dev/pts/0" COLUMNS="78" LINES="20"]
+]0;david@davidreidsma:~/Programming/Calvin/cs214/lab10[david@davidreidsma lab10]$ cd java
+]0;david@davidreidsma:~/Programming/Calvin/cs214/lab10/java[david@davidreidsma java]$ ls
+Bird.class  Birds.class  Duck.class  Goose.class  Makefile   Owl.java
+Bird.java   Birds.java   Duck.java   Goose.java   Owl.class
+]0;david@davidreidsma:~/Programming/Calvin/cs214/lab10/java[david@davidreidsma java]$ cat *.java
+/* Bird.java provides a Bird class.
+ *
+ * Begun by: Prof. Adams, for CS 214 at Calvin College.
+ * Completed by: David Reidsma
+ * Date: 04/25/2020
+ ******************************************************/
+
+public class Bird
+{
+
+ /* default constructor
+  * PostCond: myName == "".
+  */
+    public Bird() {
+	myName = "";
+    }
+
+ /* explicit constructor
+  * Receive: name, a String 
+  * PostCond: myName == name.
+  */
+    public Bird(String name) {
+	myName = name;
+    }
+
+ /* Name accessor
+  * Return: myName.
+  */
+    public String getName() {
+	return myName;
+    }
+
+ /* A Bird's Call
+  * Return: a default bird-call ("Squawk!").
+  */
+    public String getCall() {
+	return "Squawk!";
+    }
+
+ /* Output a Bird 
+  * Output: Everything known about myself
+  *          to the standard output stream.
+  */
+    public void print() {
+	System.out.println(getName() + ' ' + getClass().getName() + " says " + getCall());
+    }
+
+    private String myName;
+}
+
+/* Birds.java illustrates inheritance and polymorphism.
+ *
+ * Begun by: Joel Adams, for CS 214 Lab 10 at Calvin College.
+ * Completed by: David Reidsma
+ * Date: 04/25/2020
+ *********************************************************/
+
+public class Birds {
+  
+  public static void main(String[] args) {
+      System.out.println("\nWelcome to the Bird Park!\n");
+
+      Bird bird0 = new Bird();
+
+      Bird bird1 = new Bird("Hawkeye");
+      bird1.print();
+
+      Duck bird2 = new Duck("Donald");
+      bird2.print();
+
+      Goose bird3 = new Goose("Mother Goose");
+      bird3.print();
+
+      Owl bird4 = new Owl("Woodsey");
+      bird4.print();
+      System.out.println();
+    }
+}
+
+/* Duck.java provides a Duck subclass of Bird.
+ *
+ * Begun by: Prof. Adams, for CS 214 at Calvin College.
+ * Completed by: David Reidsma
+ * Date: 04/25/2020
+ ******************************************************/
+
+public class Duck extends Bird {
+    /**
+     * implicit constructor
+     * Postcondition: myName = ""
+     */
+    public Duck() {
+	super();
+    }
+
+    /* explicit constructor
+     * Receive: name, a String 
+     * PostCond: myName == name.
+     */
+    public Duck(String name) {
+	super(name);
+    }
+
+    /* A Duck's Call
+     * Return: a duck-call ("Quack!").
+     */
+    public String getCall() { return "Quack!"; }
+}
+
+/* Goose.java provides a Goose subclass of Bird.
+ *
+ * Begun by: Prof. Adams, for CS 214 at Calvin College.
+ * Completed by: David Reidsma
+ * Date: 04/25/2020
+ ******************************************************/
+
+public class Goose extends Bird {
+    /**
+     * implicit constructor
+     * Postcondition: myName = ""
+     */
+    public Goose() {
+	super();
+    }
+
+    /* explicit constructor
+     * Receive: name, a String 
+     * PostCond: myName == name.
+     */
+    public Goose(String name) {
+	super(name);
+    }
+
+    /* A Goose's Call
+     * Return: a goose-call ("Honk!").
+     */
+    public String getCall() { return "Honk!"; }
+} 
+
+/* Owl.java provides an Owl subclass of Bird.
+ *
+ * Begun by: Prof. Adams, for CS 214 at Calvin College.
+ * Completed by: David Reidsma
+ * Date: 04/25/2020
+ ******************************************************/
+
+public class Owl extends Bird {
+    /**
+     * implicit constructor
+     * Postcondition: myName = ""
+     */
+    public Owl() {
+	super();
+    }
+
+    /* explicit constructor
+     * Receive: name, a String 
+     * PostCond: myName == name.
+     */
+    public Owl(String name) {
+	super(name);
+    }
+
+    /* An Owl's Call
+     * Return: an owl-call ("Whoo-hoo!").
+     */
+    public String getCall() { return "Whoo-hoo!"; }
+} 
+
+]0;david@davidreidsma:~/Programming/Calvin/cs214/lab10/java[david@davidreidsma java]$ make
+javac -deprecation Birds.java
+]0;david@davidreidsma:~/Programming/Calvin/cs214/lab10/java[david@davidreidsma java]$ java Birds
+
+Welcome to the Bird Park!
+
+Hawkeye Bird says Squawk!
+Donald Duck says Quack!
+Mother Goose Goose says Honk!
+Woodsey Owl says Whoo-hoo!
+
+]0;david@davidreidsma:~/Programming/Calvin/cs214/lab10/java[david@davidreidsma java]$ cd ../ada
+]0;david@davidreidsma:~/Programming/Calvin/cs214/lab10/ada[david@davidreidsma ada]$ ls
+bird_package.adb  birds.ali         goose_package.adb  owl_package.ads
+bird_package.ads  birds.o           goose_package.ads  owl_package.ali
+bird_package.ali  duck_package.adb  goose_package.ali  owl_package.o
+bird_package.o    duck_package.ads  goose_package.o
+[0m[01;32mbirds[0m             duck_package.ali  Makefile
+birds.adb         duck_package.o    owl_package.adb
+]0;david@davidreidsma:~/Programming/Calvin/cs214/lab10/ada[david@davidreidsma ada]$ cat bird_package.ad* duck_package.ad* goose_package.ad* owl_package.ad* birds.adb
+-- bird_package.adb gives Bird-related definitions
+--
+-- Begun by: Dr. Adams, CS 214 at Calvin College.
+-- Completed by: David Reidsma
+-- Date: 04/24/2020
+---------------------------------------------------
+
+with Ada.Text_IO;
+use Ada.Text_IO;
+
+package body Bird_Package is
+ ----------------------------------------------------
+ -- initialization                                  -
+ -- Receive: A_Bird, a Bird_Type;                   -
+ --          Name, a String                         -
+ -- Return: a Bird_Type whose My_Name = Name.       -
+ ----------------------------------------------------
+   procedure Init(Bird: out Bird_Type; Name: in String) is
+   begin
+      Bird.Name := Name;
+   end Init;
+   
+ ----------------------------------------------------
+ -- Name accessor                                   -
+ -- Receive: A_Bird, a Bird_Type.                   -
+ -- Return: A_Bird.My_Name.                         -
+ ----------------------------------------------------
+   function Name(Bird: in Bird_Type) return String is
+   begin
+      return Bird.Name;
+   end Name;
+   
+ ----------------------------------------------------
+ -- A Bird's Call                                   -
+ -- Receive: A_Bird, a Bird_Type.                   -
+ -- Return: a default bird-call ("Squawk!").        -
+ ----------------------------------------------------
+   function Call(Bird: in Bird_Type) return String is
+   begin
+      return "Squawwwwwwk!";
+   end Call;
+   
+ ----------------------------------------------------
+ -- Determine type of a Bird (for derived types)    -
+ -- Receive: A_Bird, a Bird_Type.                   -
+ -- Return: "Bird".                                 -
+ ----------------------------------------------------
+   function Type_Name(Bird: in Bird_Type) return String is
+   begin
+      return "Bird";
+   end Type_Name;
+   
+ ----------------------------------------------------
+ -- Output a Bird                                   -
+ -- Receive: A_Bird, a Bird or subclass of Bird.    -
+ -- Output: Everything known about A_Bird           -
+ ----------------------------------------------------
+   procedure Put(Bird: in Bird_Type'Class) is
+   begin
+      Put(Name(Bird));
+      Put(' ');
+      Put(Type_Name(Bird));
+      Put(" says ");
+      Put(Call(Bird));
+   end Put;
+end Bird_Package;
+
+-- bird_package.ads gives Bird-related declarations
+--
+-- Begun by: Dr. Adams, for CS 214 at Calvin College.
+-- Completed by: David Reidsma
+-- Date: 04/24/2020
+---------------------------------------------------
+
+package Bird_Package is
+   type Bird_Type is tagged private;
+
+ ----------------------------------------------------
+ -- initialization                                  -
+ -- Receive: A_Bird, a Bird_Type;                   -
+ --          Name, a String                         -
+ -- Return: a Bird_Type whose My_Name = Name.       -
+ ----------------------------------------------------
+   procedure Init(Bird: out Bird_Type; Name: in String);
+   
+ ----------------------------------------------------
+ -- Name accessor                                   -
+ -- Receive: A_Bird, a Bird_Type.                   -
+ -- Return: A_Bird.My_Name.                         -
+ ----------------------------------------------------
+   function Name(Bird: in Bird_Type) return String;
+   
+ ----------------------------------------------------
+ -- A Bird's Call                                   -
+ -- Receive: A_Bird, a Bird_Type.                   -
+ -- Return: a default bird-call ("Squawk!").        -
+ ----------------------------------------------------
+   function Call(Bird: in Bird_Type) return String;
+   
+ ----------------------------------------------------
+ -- Determine type of a Bird (for derived types)    -
+ -- Receive: A_Bird, a Bird_Type.                   -
+ -- Return: "Bird".                                 -
+ ----------------------------------------------------
+   function Type_Name(Bird: in Bird_Type) return String;
+   
+ ----------------------------------------------------
+ -- Output a Bird                                   -
+ -- Receive: A_Bird, a Bird or subclass of Bird.    -
+ -- Output: Everything known about A_Bird           -
+ ----------------------------------------------------
+   procedure Put(Bird: in Bird_Type'Class);
+   
+private
+   type Bird_Type is
+      tagged record
+	 Name: String(1..6);
+      end record;
+end Bird_Package;
+-- duck_package.adb gives Duck-related definitions
+--  by over-riding Bird-related definitions.
+--
+-- Begun by: Dr. Adams, CS 214 at Calvin College.
+-- Completed by: David Reidsma
+-- Date: 04/24/2020
+---------------------------------------------------
+
+with Ada.Text_IO;
+use Ada.Text_IO;
+
+package body Duck_Package is
+   
+ ----------------------------------------------------
+ -- A Duck's Call (Over-rides Bird.Call())          -
+ -- Receive: Duck, a Duck_Type.                     -
+ -- Return: "Quack!"                                -
+ ----------------------------------------------------
+   function Call(Duck: in Duck_Type) return String is
+   begin
+      return "Quack!";
+   end Call;
+
+ ------------------------------------------------------------
+ -- Determine type of a Duck (Over-rides Bird.Type_Name()) -
+ -- Receive: Duck, a Duck_Type.                            -
+ -- Return: "Duck".                                        -
+ -----------------------------------------------------------
+   function Type_Name(Duck: in Duck_Type) return String is
+   begin
+      return "Duck";
+   end Type_Name;
+   
+end Duck_Package;
+-- duck_package.ads gives Duck-related declarations,
+--
+--  and derives Duck from Bird.
+-- Begun by: Dr. Adams, CS 214 at Calvin College.
+-- Completed by: David Reidsma
+-- Date: 04/24/2020
+---------------------------------------------------
+
+with Bird_Package; use Bird_Package;
+
+package Duck_Package is
+   
+   type Duck_Type is new Bird_Type with private;
+   
+ ----------------------------------------------------
+ -- A Duck's Call (Over-rides Bird.Call())          -
+ -- Receive: A_Duck, a Duck_Type.                   -
+ -- Return: "Quack!"                                -
+ ----------------------------------------------------
+   function Call(Duck: in Duck_Type) return String;
+
+ ------------------------------------------------------------
+ -- Determine type of a Duck (Over-rides Bird.Type_Name()) -
+ -- Receive: A_Duck, a Duck_Type.                          -
+ -- Return: "Duck".                                        -
+ -----------------------------------------------------------
+   function Type_Name(Duck: in Duck_Type) return String;
+
+private
+   type Duck_Type is new Bird_Type with
+      record
+	 null;
+      end record;
+   
+end Duck_Package;
+-- goose_package.adb gives Goose-related definitions
+--  by over-riding Bird-related definitions.
+--
+-- Begun by: Dr. Adams, CS 214 at Calvin College.
+-- Completed by: David Reidsma
+-- Date: 04/25/2020
+---------------------------------------------------
+
+package body Goose_Package is
+
+ ----------------------------------------------------
+ -- A Goose's Call (Over-rides Bird.Call())         -
+ -- Receive: Goose, a Goose.                        -
+ -- Return: "Honk!"                                 -
+ ----------------------------------------------------
+   function Call(Goose: in Goose_Type) return String is
+   begin
+      return "Honk!";
+   end Call;
+
+ -----------------------------------------------------
+ -- Determine type of a Goose                        -
+ -- (Over-rides Bird.Type_Name())                    -
+ -- Receive: Goose, a Goose.                         -
+ -- Return: "Goose".                                 -
+ -----------------------------------------------------
+   function Type_Name(Goose: in Goose_Type) return String is
+   begin
+      return "Goose";
+   end Type_Name;
+
+end Goose_Package;
+-- goose_package.ads gives Goose-related declarations,
+--
+--  and derives Goose from Bird.
+-- Begun by: Dr. Adams, CS 214 at Calvin College.
+-- Completed by: David Reidsma
+-- Date: 04/25/2020
+---------------------------------------------------
+
+with Bird_Package; use Bird_Package;
+
+package Goose_Package is
+
+   type Goose_Type is new Bird_Type with private;
+
+ ----------------------------------------------------
+ -- A Goose's Call (Over-rides Bird.Call())         -
+ -- Receive: Goose, a Goose.                        -
+ -- Return: "Honk!"                                 -
+ ----------------------------------------------------
+   function Call(Goose: in Goose_Type) return String;
+
+ -----------------------------------------------------
+ -- Determine type of a Goose                        -
+ -- (Over-rides Bird.Type_Name())                    -
+ -- Receive: Goose, a Goose.                         -
+ -- Return: "Goose".                                 -
+ -----------------------------------------------------
+   function Type_Name(Goose: in Goose_Type) return String;
+
+private
+   type Goose_Type is new Bird_Type with
+      record
+	 null;
+      end record;
+
+end Goose_Package;
+-- owl_package.adb gives Owl-related definitions
+--  by over-riding Bird-related definitions.
+--
+-- Begun by: Dr. Adams, CS 214 at Calvin College.
+-- Completed by: David Reidsma
+-- Date: 04/25/2020
+---------------------------------------------------
+
+with Ada.Text_IO;
+use Ada.Text_IO;
+
+package body Owl_Package is
+
+ ----------------------------------------------------
+ -- A Owl's Call (Over-rides Bird.Call())           -
+ -- Receive: Owl, an Owl_Type.                      -
+ -- Return: "Whoo!"                                 -
+ ----------------------------------------------------
+   function Call(Owl: in Owl_Type) return String is
+   begin
+      return "Whoo!";
+   end Call;
+
+ -----------------------------------------------------
+ -- Determine type of a Owl                          -
+ -- (Over-rides Bird.Type_Name())                    -
+ -- Receive: Owl, an Owl_Type.                       -
+ -- Return: "Owl".                                   -
+ -----------------------------------------------------
+   function Type_Name(Owl: in Owl_Type) return String is
+   begin
+      return "Owl";
+   end Type_Name;
+   
+end Owl_Package;
+-- owl_package.ads gives Owl-related declarations,
+--  and derives Owl from Bird.
+--
+-- Begun by: Dr. Adams, CS 214 at Calvin College.
+-- Completed by: David Reidsma
+-- Date: 04/25/2020
+---------------------------------------------------
+
+with Bird_Package; use Bird_Package;
+
+package Owl_Package is
+   
+   type Owl_Type is new Bird_Type with private;
+
+ ----------------------------------------------------
+ -- A Owl's Call (Over-rides Bird.Call())           -
+ -- Receive: Owl, an Owl_Type.                      -
+ -- Return: "Whoo!"                                 -
+ ----------------------------------------------------
+   function Call(Owl: in Owl_Type) return String;
+
+ -----------------------------------------------------
+ -- Determine type of a Owl                          -
+ -- (Over-rides Bird.Type_Name())                    -
+ -- Receive: Owl, an Owl_Type.                       -
+ -- Return: "Owl".                                   -
+ -----------------------------------------------------
+   function Type_Name(Owl: in Owl_Type) return String;
+   
+private
+   type Owl_Type is new Bird_Type with
+      record
+	 null;
+      end record;
+
+end Owl_Package;
+-- birds.adb tests our Birds type hierarchy.
+--
+-- Begun by: Dr. Adams, CS 214 at Calvin College
+-- Completed by: David Reidsma
+-- Date: 04/24/2020
+-----------------------------------------------------
+
+with Bird_Package, 
+        Duck_Package, 
+        Goose_Package,
+        Owl_Package,
+      Ada.Text_IO;
+use Bird_Package,
+        Duck_Package, 
+        Goose_Package,
+        Owl_Package,
+      Ada.Text_IO;
+
+
+procedure Birds is
+   Bird1 : Bird_Type;       -- base class
+   Bird2 : Duck_Type;       -- derived class 1
+   Bird3 : Goose_Type;      -- derived class 2
+   Bird4 : Owl_Type;        -- derived class 3
+
+begin
+   New_Line;
+   Put("Welcome to the Bird Park!"); New_Line;
+   Init(Bird1, "Tweety");
+   Put(Bird1); New_Line;
+
+   Init(Bird2, "Donald");
+   Put(Bird2); New_Line;
+
+   Init(Bird3, "Mother");
+   Put(Bird3); New_Line;
+
+   Init(Bird4, "Woodsy");
+   Put(Bird4); New_Line;
+
+   New_Line;
+end Birds;
+
+]0;david@davidreidsma:~/Programming/Calvin/cs214/lab10/ada[david@davidreidsma ada]$ make
+make: 'birds' is up to date.
+]0;david@davidreidsma:~/Programming/Calvin/cs214/lab10/ada[david@davidreidsma ada]$ ./birds
+
+Welcome to the Bird Park!
+Tweety Bird says Squawwwwwwk!
+Donald Duck says Quack!
+Mother Goose says Honk!
+Woodsy Owl says Whoo!
+
+]0;david@davidreidsma:~/Programming/Calvin/cs214/lab10/ada[david@davidreidsma ada]$ cd ../ruby
+]0;david@davidreidsma:~/Programming/Calvin/cs214/lab10/ruby[david@davidreidsma ruby]$ ls
+bird.rb  birds.rb  duck.rb  goose.rb  owl.rb
+]0;david@davidreidsma:~/Programming/Calvin/cs214/lab10/ruby[david@davidreidsma ruby]$ cat *.rb
+# bird.rb | Defines a Bird superclass 
+#   to be extended by specific bird sub-classes.
+#
+# Begun by: Dr. Adams, for CS 214 at Calvin College.
+# Completed by: David Reidsma
+# Date: 04/25/2020
+####################################################
+
+class Bird
+
+  attr_reader :name
+
+  # Initialize a bird with a name.
+  # Postcondition: name = name
+  def initialize(name)
+    @name = name
+  end
+
+  # Get the call of this bird.
+  def call
+    return "Squaaaaaaawk!"
+  end
+
+  # Get the class name.
+  def class_name
+    self.class.to_s
+  end
+
+  # Print details of this bird to the console.
+  def print
+    puts name + ' ' + class_name + " says \"" + call + "\""
+  end
+
+end
+# birds.rb | Tests out the menagerie of bird classes.
+#
+# Begun by: Dr. Adams, for CS 214 at Calvin College.
+# Completed by: David Reidsma
+# Date: 04/25/2020
+######################################################
+
+require './bird.rb'
+require './duck.rb'
+require './goose.rb'
+require './owl.rb'
+
+puts "\nWelcome to the Bird Park!\n\n"
+
+bird0 = Bird.new "Hawkeye"
+bird0.print
+
+bird1 = Duck.new "Donald"
+bird1.print
+
+bird2 = Goose.new "Mother"
+bird2.print
+
+bird3 = Owl.new "Woodsey"
+bird3.print
+
+puts "\n\n"
+# duck.rb | Defines the Duck class which inherits attributes and methods
+#   from the Bird superclass.
+#
+# Begun by: Dr. Adams, for CS 214 at Calvin College.
+# Completed by: David Reidsma
+# Date: 04/25/2020
+####################################################
+
+require './bird.rb'
+
+class Duck < Bird
+
+  # Get the call of this bird.
+  def call
+    return "Quack!"
+  end
+
+end
+# goose.rb | Defines the Goose class which inherits attributes and methods
+#   from the Bird superclass.
+#
+# Begun by: Dr. Adams, for CS 214 at Calvin College.
+# Completed by: David Reidsma
+# Date: 04/25/2020
+####################################################
+
+require './bird.rb'
+
+class Goose < Bird
+
+  # Get the call of this bird.
+  def call
+    return "Honk!"
+  end
+
+end
+# owl.rb | Defines the Owl class which inherits attributes and methods
+#   from the Bird superclass.
+#
+# Begun by: Dr. Adams, for CS 214 at Calvin College.
+# Completed by: David Reidsma
+# Date: 04/25/2020
+####################################################
+
+require './bird.rb'
+
+class Owl < Bird
+
+  # Get the call of this bird.
+  def call
+    return "Whoo-hoo!"
+  end
+
+end
+]0;david@davidreidsma:~/Programming/Calvin/cs214/lab10/ruby[david@davidreidsma ruby]$ ruby birds.rb
+
+Welcome to the Bird Park!
+
+Hawkeye Bird says "Squaaaaaaawk!"
+Donald Duck says "Quack!"
+Mother Goose says "Honk!"
+Woodsey Owl says "Whoo-hoo!"
+
+
+]0;david@davidreidsma:~/Programming/Calvin/cs214/lab10/ruby[david@davidreidsma ruby]$ cd ../clojure/
+]0;david@davidreidsma:~/Programming/Calvin/cs214/lab10/clojure[david@davidreidsma clojure]$ ls src
+Bird.clj  birds.clj  Duck.clj  Goose.clj  Owl.clj
+]0;david@davidreidsma:~/Programming/Calvin/cs214/lab10/clojure[david@davidreidsma clojure]$ cat src/*.clj
+;;;; Bird.clj provides a Bird "class".
+;;;; 
+;;;; Begun by: Prof. Adams, for CS 214 at Calvin College.
+;;;; Completed by: David Reidsma
+;;;; Date: 04/25/2020
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Define a Bird 'class' with one attribute, the Bird's name.
+(defrecord Bird [name])
+
+;;; Bird constructors
+;;; - default: no args
+;;;   Postcondition: name == a default value.
+;;; - explicit:
+;;;   Receive: itsName, a String.
+;;;   Postcondition: name == itsName.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defn make-Bird
+  ([] (->Bird "Ann Onymous"))
+  ([itsName] (->Bird itsName)))
+
+
+;;; accessor method for name attribute
+;;; Receive: this, a Bird object.
+;;; Return: this's name.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defn get-name [^Bird bird]
+  (:name bird))
+
+;; define get-class, get-call, and to-string as polymorphic methods
+;; Note: these must be defined using defmethod instead of defn.
+(defmulti get-class class)
+(defmulti get-call class)
+(defmulti to-string class)
+
+;;; method to retrieve a Bird's class
+;;; Receive: this, a Bird object.
+;;; Return: "Bird".
+;;; Note: 'subclasses' of Bird must define this method.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defmethod get-class Bird [_]
+  "Bird")
+
+;;; method to retrieve a Bird's call
+;;; Receive: this, a Bird object.
+;;; Return: a default bird-call.
+;;; Note: 'subclasses' of Bird must define this method.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defmethod get-call :default [_]
+  "Squaaaawk!")
+
+;;; method to combine a Bird, its class and its call into a String.
+;;; Receive: this, a Bird object.
+;;; Return: a String representing this, its class, and its call.
+;;; Note: get-class and get-call are polymorphic methods.
+;;; Note also: the use of :default for its class means that
+;;;        'subclasses' may but are not required to define it.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defmethod to-string :default [bird]
+  (str (get-name bird) " " (get-class bird) " says, \"" (get-call bird) "\""))
+;; birds.clj illustrates inheritance and polymorphism in Clojure.
+;;
+;; Output: the results of testing the Bird functions.
+;;
+;; Usage: clojure -m birds
+;;
+;; Begun by: Prof. Adams, for CS 214 Lab 10 at Calvin College.
+;; Completed by: David Reidsma
+;; Date: 04/25/2020
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(ns birds
+  (:require
+      [Bird]
+      [Duck]
+      [Goose]
+      [Owl]
+  )
+)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Function -main tests the classes in the Bird hierarchy.
+;;; Output: the results of testing the Bird functions.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defn -main []
+  (let
+    [                              ;; Birds
+      bird0 (make-Bird)            ; default Bird constructor
+      bird1 (make-Bird "Hawkeye")  ; explicit Bird constructor
+                                   ;; Ducks
+      bird2 (make-Duck)            ; default Duck constructor
+      bird3 (make-Duck  "Donald")  ; explicit Duck constructor
+                                   ;; Geese
+      bird4 (make-Goose)           ; default Goose constructor
+      bird5 (make-Goose "Mother")  ; explicit Goose constructor
+                                   ;; Owls
+      bird6 (make-Owl)             ; default Owl constructor
+      bird7 (make-Owl "Woodsey")   ; explicit Owl constructor
+    ]
+
+    (println "\nWelcome to the Bird Park!\n")
+    (println (to-string bird0))
+    (println (to-string bird1))
+    (println)
+    (println (to-string bird2))
+    (println (to-string bird3))
+    (println)
+    (println (to-string bird4))
+    (println (to-string bird5))
+    (println)
+    (println (to-string bird6))
+    (println (to-string bird7))
+    (println)
+    (println "Goodbye, and come again!\n")
+    (println)
+  )
+)
+ 
+;;;; Duck.clj provides a Duck "class".
+;;;; 
+;;;; Begun by: Prof. Adams, for CS 214 at Calvin College.
+;;;; Completed by: David Reidsma
+;;;; Date: 04/25/2020
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; bring in 'Bird' (to be used as superclass) 
+(load "Bird")
+
+;; define 'Duck' as 'subclass' of Bird
+(defrecord Duck [^Bird name])
+
+;;; Duck constructors
+;;; - default: takes no arguments
+;;;   Postcondition: name is initialized to a default value
+;;; - explicit: takes one parameter
+;;;   Receive: itsName, a String
+;;;   Postcondition: name == itsName
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defn make-Duck
+  ([]                (->Duck "Ann Onymous"))
+  ([^String itsName] (->Duck itsName)))
+
+;;; method to retrieve a Duck's class
+;;; Receive: this, a Duck object.
+;;; Return: "Duck"
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defmethod get-class Duck [_]
+  "Duck")
+
+;;; method to retrieve a Duck's call
+;;; Receive: this, a Duck object.
+;;; Return: "Quack!"
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defmethod get-call Duck [_]
+  "Quack!")
+;;;; Goose.clj provides a Goose "class".
+;;;; 
+;;;; Begun by: Prof. Adams, for CS 214 at Calvin College.
+;;;; Completed by: David Reidsma
+;;;; Date: 04/25/2020
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; bring in 'Bird' (to be used as 'superclass')
+(load "Bird")
+
+;; define 'Goose' as 'subclass' of Bird
+(defrecord Goose [^Bird name])
+
+;;; Goose constructors
+;;; - default: no args
+;;;   Postcondition: name == a default value. 
+;;; - explicit1:
+;;;   Receive: itsName, a String
+;;;   Postcondition: name == itsName.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defn make-Goose
+  ([]                (->Goose "Ann Onymous"))
+  ([^String itsName] (->Goose itsName)))
+
+;;; method to retrieve a Goose's class
+;;; Receive: this, a Goose object.
+;;; Return: "Goose".
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defmethod get-class Goose [_]
+  "Goose")
+
+;;; method to retrieve a Goose's call
+;;; Receive: this, a Goose object.
+;;; Return: "Honk!"
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defmethod get-call Goose [_]
+  "Honk!")
+;;;; Owl.clj provides an Owl "class".
+;;;; 
+;;;; Begun by: Prof. Adams, for CS 214 at Calvin College.
+;;;; Completed by: David Reidsma
+;;;; Date: 04/25/2020
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; bring in 'Bird' (to be used as 'superclass')
+(load "Bird")
+
+;; define 'Owl' as 'subclass' of Bird
+(defrecord Owl [^Bird name])
+
+;;; Owl constructors
+;;; - default: no args
+;;;   Postcondition: name == a default value. 
+;;; - explicit1:
+;;;   Receive: itsName, a String
+;;;   Postcondition: name == itsName.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defn make-Owl
+  ([]                (->Owl "Ann Onymous"))
+  ([^String itsName] (->Owl itsName)))
+
+;;; method to retrieve an Owl's class
+;;; Receive: this, an Owl object.
+;;; Return: "Owl".
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defmethod get-class Owl [_]
+  "Owl")
+
+;;; method to retrieve an Owl's call
+;;; Receive: this, an Owl object.
+;;; Return: "Whoo-hoo!"
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defmethod get-call Owl [_]
+  "Whoo-hoo!")
+]0;david@davidreidsma:~/Programming/Calvin/cs214/lab10/clojure[david@davidreidsma clojure]$ [K[david@davidreidsma clojure]$ make
+clojure -m birds
+
+Welcome to the Bird Park!
+
+Ann Onymous Bird says, "Squaaaawk!"
+Hawkeye Bird says, "Squaaaawk!"
+
+Ann Onymous Duck says, "Quack!"
+Donald Duck says, "Quack!"
+
+Ann Onymous Goose says, "Honk!"
+Mother Goose says, "Honk!"
+
+Ann Onymous Owl says, "Whoo-hoo!"
+Woodsey Owl says, "Whoo-hoo!"
+
+Goodbye, and come again!
+
+
+]0;david@davidreidsma:~/Programming/Calvin/cs214/lab10/clojure[david@davidreidsma clojure]$ cd ..
+]0;david@davidreidsma:~/Programming/Calvin/cs214/lab10[david@davidreidsma lab10]$ exit
+
+Script done on 2020-04-25 02:07:18-04:00 [COMMAND_EXIT_CODE="0"]
