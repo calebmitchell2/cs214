@@ -1,0 +1,114 @@
+Script started on 2020-04-28 18:01:27-04:00 [TERM="xterm-kitty" TTY="/dev/pts/0" COLUMNS="86" LINES="25"]
+]0;david@davidreidsma:~/Programming/Calvin/cs214/extra_cred_proj[david@davidreidsma extra_cred_proj]$ cat src/extra_cred.clj
+;; This namespace contains functions to reverse lists, check if something is a member of a list, and get a subsequence of a list.
+;; Author: David Reidsma
+;; Date: 04/28/2020
+(ns extra-cred)
+
+;; Reverse a list.
+;; Input:
+;;    list: the list to reverse
+;; Returns: the list, but reversed
+(defn my-reverse
+  ([list] (my-reverse list '()))
+  ([list reversed-list]
+   (if (empty? list)
+     reversed-list
+     (recur (rest list) (conj reversed-list (first list))))))
+
+;; Reverse a list and any list that might be inside. This does so recursively, so it reverses lists on every level.
+;; Input:
+;;    list: the list to reverse
+;; Returns: the list, but it and every list within have been reversed
+(defn super-reverse
+  ([list] (super-reverse list '()))
+  ([list reversed-list]
+   (if (empty? list)
+     reversed-list
+     (let [item (first list)
+           new-list (rest list)]
+       (if (seq? item)
+         (recur new-list (conj reversed-list (super-reverse item)))
+         (recur new-list (conj reversed-list item)))))))
+
+;; Check if something is in a list.
+;; Input:
+;;    item: the item to check for
+;;    list: the list to search
+;; Returns: true if the item is in the list, false otherwise
+(defn member? [item list]
+  (if (empty? list)
+    false
+    (if (= item (first list))
+      true
+      (member? item (rest list)))))
+
+;; Get a subsequence of a list.
+;; Input:
+;;    list: the list to get a sequence of
+;;    start-index: the index to start at
+;;    length: the amount of items to get
+;; Returns: the items in the specified list and range
+(defn subsequence
+  ([list start-index length]
+   (let [end-index (dec (+ start-index length))
+         list-size (count list)]
+     ; Return nil if we are passed invalid bound or if the list is empty.
+     (if (or (< start-index 0) (>= end-index list-size) (empty? list))
+       nil
+       (subsequence list start-index end-index list-size '()))))
+  ([list start-index end-index index result]
+   (let [smaller-list (take index list)
+         new-index (dec index)]
+     (if (> index end-index)
+       ; If we are outside the bounds, try again with an element removed.
+       (recur smaller-list start-index end-index new-index result)
+       (if (>= index start-index)
+         ; If we are within the bounds, add an element to the new list.
+         (recur smaller-list start-index end-index new-index (conj result (last list)))
+         result)))))
+
+(defn -main []
+  (println "my-reverse tests")
+  (println "(my-reverse '(1 2 3 4 5)):\t\t\t" (my-reverse '(1 2 3 4 5)))
+  (println "(my-reverse '()):\t\t\t\t" (my-reverse ()))
+  (println "\nsuper-reverse tests")
+  (println "(super-reverse '(1 2 (3 4) (5 (6 7)))):\t\t" (super-reverse '(1 2 (3 4) (5 (6 7)))))
+  (println "\nmember tests")
+  (println "(member? '(1 2) '((1 2) 3 (4 (5 6)))):\t\t" (member? '(1 2) '((1 2) 3 (4 (5 6)))))
+  (println "(member? 3 '((1 2) 3 (4 (5 6)))):\t\t" (member? 3 '((1 2) 3 (4 (5 6)))))
+  (println "(member? '(4 (5 6)) '((1 2) 3 (4 (5 6)))):\t" (member? '(4 (5 6)) '((1 2) 3 (4 (5 6)))))
+  (println "(member? 1 '((1 2) 3 (4 (5 6)))):\t\t" (member? 1 '((1 2) 3 (4 (5 6)))))
+  (println "(member? 2 '((1 2) 3 (4 (5 6)))):\t\t" (member? 2 '((1 2) 3 (4 (5 6)))))
+  (println "(member? 4 '((1 2) 3 (4 (5 6)))):\t\t" (member? 4 '((1 2) 3 (4 (5 6)))))
+  (println "\nsubsequence tests")
+  (println "(subsequence '(1 2 (3 4) (5 (6 7))) 1 2)):\t" (subsequence '(1 2 (3 4) (5 (6 7))) 1 2))
+  (println "(subsequence '(1 2 3 4 5 6 7) 2 4):\t\t" (subsequence '(1 2 3 4 5 6 7) 2 4))
+  (println "(subsequence '() 4 5):\t\t\t\t" (subsequence '() 4 5))
+  (println "(subsequence '(1 2) -4 1):\t\t\t" (subsequence '(1 2) -4 1))
+  (println "(subsequence '(1 2 3) 0 18):\t\t\t" (subsequence '(1 2 3) 0 18)))
+]0;david@davidreidsma:~/Programming/Calvin/cs214/extra_cred_proj[david@davidreidsma extra_cred_proj]$ clojure -m extra-cred
+my-reverse tests
+(my-reverse '(1 2 3 4 5)):			 (5 4 3 2 1)
+(my-reverse '()):				 ()
+
+super-reverse tests
+(super-reverse '(1 2 (3 4) (5 (6 7)))):		 (((7 6) 5) (4 3) 2 1)
+
+member tests
+(member? '(1 2) '((1 2) 3 (4 (5 6)))):		 true
+(member? 3 '((1 2) 3 (4 (5 6)))):		 true
+(member? '(4 (5 6)) '((1 2) 3 (4 (5 6)))):	 true
+(member? 1 '((1 2) 3 (4 (5 6)))):		 false
+(member? 2 '((1 2) 3 (4 (5 6)))):		 false
+(member? 4 '((1 2) 3 (4 (5 6)))):		 false
+
+subsequence tests
+(subsequence '(1 2 (3 4) (5 (6 7))) 1 2)):	 (2 (3 4))
+(subsequence '(1 2 3 4 5 6 7) 2 4):		 (3 4 5 6)
+(subsequence '() 4 5):				 nil
+(subsequence '(1 2) -4 1):			 nil
+(subsequence '(1 2 3) 0 18):			 nil
+]0;david@davidreidsma:~/Programming/Calvin/cs214/extra_cred_proj[david@davidreidsma extra_cred_proj]$ exit
+
+Script done on 2020-04-28 18:02:10-04:00 [COMMAND_EXIT_CODE="0"]
