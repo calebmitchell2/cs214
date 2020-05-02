@@ -94,7 +94,7 @@ public class ThreadedArraySum {
 	long startTime = System.nanoTime();             // start timing
 	long sum = sumArray(myArray);                    // sum the values
 	long totalTime = System.nanoTime() - startTime; // stop timing
-     
+
 	System.out.println("\nThe sum of the " + myArray.length
 			   + " numbers is: " + sum 
 			   + "\n and summing them took " 
@@ -107,23 +107,25 @@ public class ThreadedArraySum {
      */
     private long sumArray(int[] arr) {
 	Helper[] helpers = new Helper[threadCount];
-	for (int i = 1; i < threadCount; ++i) {
-	    helpers[i] = new Helper(i);
-	    helpers[i].start();
+
+	for (int i = 1; i < threadCount; ++i) {     // for each helper:
+	    helpers[i] = new Helper(i);                  //  create, and
+	    helpers[i].start();                          //  launch them
 	}
-	
-	long sum = getSliceSum(0);
+
+	long sum = getSliceSum(0);                         // main thread does slice 0
 
 	try {
-	    for (int i = 1; i < threadCount; i++) {
-		helpers[i].join();
-		sum += helpers[i].getPartialSum();
+	    for (int i = 1; i < threadCount; ++i) {  // for each helper h:
+		helpers[i].join();                        //  wait for h to finish
+		sum += helpers[i].getPartialSum();        //  get its partial sum
 	    }
-	} catch (InterruptedException e) {
-	    System.err.println("\n*** a HelperThread was interrupted!\n");
-	    System.err.println(e);
+	} catch( InterruptedException ie) {             // required by join()
+	    System.err.println("\n*** a Helper was interrupted!\n");
+	    System.err.println(ie);
 	    System.exit(1);
 	}
+
 	return sum;
     }
 
@@ -133,19 +135,19 @@ public class ThreadedArraySum {
      * @return The sum of the numbers in this slice.
      */
     private long getSliceSum(int id) {
-	int sliceSize = myArray.length / threadCount;
-	int start = id * sliceSize;
-	int stop = (id + 1) * sliceSize;
-	if (id == threadCount - 1)
-	    stop = myArray.length;
-
-	long sliceSum = 0;
-	for (int i = start; i < stop; ++i)
-	    sliceSum += myArray[i];
-
-	return sliceSum;
+        int sliceSize = myArray.length / threadCount;
+        int start = id * sliceSize;         // starting index
+        int stop = (id+1) * sliceSize;      // stopping index
+        if ( id == threadCount-1 ) {       // have final thread
+            stop = myArray.length;            //  handle leftovers
+        } 
+        long sliceSum = 0;
+        for (int i = start; i < stop; ++i) {  // sum the ints
+            sliceSum += myArray[i];           //  in my slice
+        }
+        return sliceSum;
     }
-    
+
     private class Helper extends Thread {
 	private int id;
 	private long partialSum;
