@@ -12,8 +12,8 @@
 ;;;;          and how long it took to compute that sum.
 ;;;;
 ;;;; Begun by: Prof. Adams for CS 214 at Calvin College.
-;;;; Completed by:
-;;;; Date:
+;;;; Completed by: David Reidsma
+;;;; Date: 05/02/2020
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (ns arraySum)
@@ -76,9 +76,7 @@
 
      (fill array in)                  ; fill array with other vals from in
      (.close in)                      ; close Scanner
-     array                            ; return the array
-    )
-)
+     array))                          ; return the array
 
 
 ;;; sum the values in an array sequentially.
@@ -87,20 +85,13 @@
 ;;; Return: the sum of the values in anArray.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defn sumArray [anArray]
-  (loop
-    [
-      sum 0
-      i   0
-    ]
-
+  (loop [sum 0
+         i 0]
     (if (>= i (count anArray)) ; Basis: i >= aVec.size:
       sum                      ;  return sum (i.e., 0).
-                               ; I-Step: i < n:
-                               ;  return aVec[i] + sum and recurse(i+1).
-      (recur (+ (get anArray i) sum) (inc i))
-    )
-  )
-)
+                                        ; I-Step: i < n:
+                                        ;  return aVec[i] + sum and recurse(i+1).
+      (recur (+ (get anArray i) sum) (inc i)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; main method 
