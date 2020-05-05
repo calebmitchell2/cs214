@@ -1,0 +1,14 @@
+Script started on 2020-05-04 20:33:00-04:00 [TERM="xterm-kitty" TTY="/dev/pts/1" COLUMNS="78" LINES="25"]
+]0;david@davidreidsma:~/Programming/Calvin/cs214/extra_cred_lab[david@davidreidsma extra_cred_lab]$ clojure
+Clojure 1.10.1
+user=> (fn [x] (+ x x))
+#object[user$eval136$fn__137 0x5e01a982 "user$eval136$fn__137@5e01a982"]
+user=> ^P  ^[[A    
+user=> (fn    (fn [x] + (+x  x x)) 21)
+42
+user=> ((fn [x y] (+ (* x x) (*y    y y))) 3 4)
+25
+user=> 
+]0;david@davidreidsma:~/Programming/Calvin/cs214/extra_cred_lab[david@davidreidsma extra_cred_lab]$ exit
+
+Script done on 2020-05-04 20:38:48-04:00 [COMMAND_EXIT_CODE="0"]

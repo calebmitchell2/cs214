@@ -1,0 +1,9 @@
+Script started on 2020-05-04 20:32:15-04:00 [TERM="xterm-kitty" TTY="/dev/pts/1" COLUMNS="78" LINES="25"]
+]0;david@davidreidsma:~/Programming/Calvin/cs214/extra_cred_lab[david@davidreidsma extra_cred_lab]$ clojure
+Clojure 1.10.1
+user=> (+ 1 2 3 4 5)
+15
+user=> 
+]0;david@davidreidsma:~/Programming/Calvin/cs214/extra_cred_lab[david@davidreidsma extra_cred_lab]$ exit
+
+Script done on 2020-05-04 20:32:30-04:00 [COMMAND_EXIT_CODE="0"]

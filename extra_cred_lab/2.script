@@ -1,0 +1,21 @@
+Script started on 2020-05-04 21:16:48-04:00 [TERM="xterm-kitty" TTY="/dev/pts/1" COLUMNS="78" LINES="35"]
+]0;david@davidreidsma:~/Programming/Calvin/cs214/extra_cred_lab[david@davidreidsma extra_cred_lab]$ clojure
+Clojure 1.10.1
+user=> (def triple (fn [x] (* x 3)))
+#'user/triple
+user=> (triple 4)
+12
+user=> (defn triple [x] (*x  x 3))
+#'user/triple
+user=> (triple 4)
+12
+user=> (#(+ (* %1 %1) (* %2 %2)) 3 4)
+25
+user=> (def sum2Squares #(+ (* %1 %1) (*%2   %2 %2)))
+#'user/sum2Squares
+user=> (sum2Squares 3 4)
+25
+user=> 
+]0;david@davidreidsma:~/Programming/Calvin/cs214/extra_cred_lab[david@davidreidsma extra_cred_lab]$ exit
+
+Script done on 2020-05-04 21:22:25-04:00 [COMMAND_EXIT_CODE="0"]

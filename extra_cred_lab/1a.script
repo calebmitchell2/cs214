@@ -1,0 +1,15 @@
+Script started on 2020-05-04 20:59:57-04:00 [TERM="xterm-kitty" TTY="/dev/pts/1" COLUMNS="78" LINES="25"]
+]0;david@davidreidsma:~/Programming/Calvin/cs214/extra_cred_lab[david@davidreidsma extra_cred_lab]$ s[Kclojure
+Clojure 1.10.1
+user=> ((fn [a b c] (max (Math/abs a) (Math/abs b) (Math/abs c))) 1 2 -3)
+3
+user=> ((fn [a b c] (max (Math/abs a) (Math/abs b) (Math/abs c))) -1 8 -8)
+8
+user=> ((fn [a b c] (max (Math/abs a) (Math/abs b) (Math/abs c))) -1 -1 -1)
+1
+user=> ((fn [a b c] (max (Math/abs a) (Math/abs b) (Math/abs c))) 5 6 7)
+7
+user=> 
+]0;david@davidreidsma:~/Programming/Calvin/cs214/extra_cred_lab[david@davidreidsma extra_cred_lab]$ exit
+
+Script done on 2020-05-04 21:01:02-04:00 [COMMAND_EXIT_CODE="0"]
