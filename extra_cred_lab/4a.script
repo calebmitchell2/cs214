@@ -1,0 +1,15 @@
+Script started on 2020-05-08 00:36:48-04:00 [TERM="xterm-kitty" TTY="/dev/pts/1" COLUMNS="57" LINES="31"]
+]0;david@davidreidsma:~/Programming/Calvin/cs214/extra_cred_lab[david@davidreidsma extra_cred_lab]$ clojure
+Clojure 1.10.1
+user=> (defn sumSquares [values] (reduce + (map (fn [x] (Math/pow x 2)) values )))
+#'user/sumSquares
+user=> (sumSquares '(1 2 3))
+14.0
+user=> (sumSquares '(1 2 3 4 5))
+55.0
+user=> (sumSquares [-1 -2 -3 0 1])
+15.0
+user=> 
+]0;david@davidreidsma:~/Programming/Calvin/cs214/extra_cred_lab[david@davidreidsma extra_cred_lab]$ exit
+
+Script done on 2020-05-08 00:42:15-04:00 [COMMAND_EXIT_CODE="0"]

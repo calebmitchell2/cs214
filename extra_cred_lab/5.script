@@ -1,0 +1,31 @@
+Script started on 2020-05-08 00:43:12-04:00 [TERM="xterm-kitty" TTY="/dev/pts/1" COLUMNS="57" LINES="42"]
+]0;david@davidreidsma:~/Programming/Calvin/cs214/extra_cred_lab[david@davidreidsma extra_cred_lab]$ clojure
+Clojure 1.10.1
+user=> (defn incMaker [incValue] (fn [x] (+ x incValue)))
+#'user/incMaker
+user=> (incMaker 5)
+#object[user$incMaker$fn__136 0x58fb7731 "user$incMaker$fn__136@58fb7731"]
+user=> ((incMaker 5) 1)
+6
+user=> (def inc5 (incMaker 5))
+#'user/inc5
+user=> (inc5 2)
+7
+user=> (defn greetingBuilder [greeting] (fn [visitor] (str greeting ", " visitor "!")))
+#'user/greetingBuilder
+user=> (def csGreeting (greetingBuilder "Welcome to CS 214"))
+#'user/csGreeting
+user=> (csGreeting "Ann")
+"Welcome to CS 214, Ann!"
+user=> (def englishGreeting (greetingBuilder "Hello"))
+#'user/englishGreeting
+user=> (englishGreeting "Chris")
+"Hello, Chris!"
+user=> (def frenchGreeting (greetingBuilder "Bonjour"))
+#'user/frenchGreeting
+user=> (frenchGreeting "Chris")
+"Bonjour, Chris!"
+user=> 
+]0;david@davidreidsma:~/Programming/Calvin/cs214/extra_cred_lab[david@davidreidsma extra_cred_lab]$ exit
+
+Script done on 2020-05-08 00:47:22-04:00 [COMMAND_EXIT_CODE="0"]

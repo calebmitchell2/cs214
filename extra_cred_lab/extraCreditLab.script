@@ -1,0 +1,240 @@
+Script started on 2020-05-04 20:32:15-04:00 [TERM="xterm-kitty" TTY="/dev/pts/1" COLUMNS="78" LINES="25"]
+]0;david@davidreidsma:~/Programming/Calvin/cs214/extra_cred_lab[david@davidreidsma extra_cred_lab]$ clojure
+Clojure 1.10.1
+user=> (+ 1 2 3 4 5)
+15
+user=> 
+]0;david@davidreidsma:~/Programming/Calvin/cs214/extra_cred_lab[david@davidreidsma extra_cred_lab]$ exit
+
+Script done on 2020-05-04 20:32:30-04:00 [COMMAND_EXIT_CODE="0"]
+Script started on 2020-05-04 20:59:57-04:00 [TERM="xterm-kitty" TTY="/dev/pts/1" COLUMNS="78" LINES="25"]
+]0;david@davidreidsma:~/Programming/Calvin/cs214/extra_cred_lab[david@davidreidsma extra_cred_lab]$ s[Kclojure
+Clojure 1.10.1
+user=> ((fn [a b c] (max (Math/abs a) (Math/abs b) (Math/abs c))) 1 2 -3)
+3
+user=> ((fn [a b c] (max (Math/abs a) (Math/abs b) (Math/abs c))) -1 8 -8)
+8
+user=> ((fn [a b c] (max (Math/abs a) (Math/abs b) (Math/abs c))) -1 -1 -1)
+1
+user=> ((fn [a b c] (max (Math/abs a) (Math/abs b) (Math/abs c))) 5 6 7)
+7
+user=> 
+]0;david@davidreidsma:~/Programming/Calvin/cs214/extra_cred_lab[david@davidreidsma extra_cred_lab]$ exit
+
+Script done on 2020-05-04 21:01:02-04:00 [COMMAND_EXIT_CODE="0"]
+Script started on 2020-05-04 21:02:51-04:00 [TERM="xterm-kitty" TTY="/dev/pts/1" COLUMNS="78" LINES="35"]
+]0;david@davidreidsma:~/Programming/Calvin/cs214/extra_cred_lab[david@davidreidsma extra_cred_lab]$ clojure
+Clojure 1.10.1
+user=> ((fn [x y z] (+ x y z)) 5 5 5)
+15
+user=> (fn    (fn [x  ] nil? x)^[[D^[[D^[[D^[[D^[[D                                    
+user=> ((fn [x] (nil? x)) nil)
+true
+user=> ((fn [x] (nil? x)) 5)
+false
+user=> ((fn [] 17.2))
+17.2
+user=> 
+]0;david@davidreidsma:~/Programming/Calvin/cs214/extra_cred_lab[david@davidreidsma extra_cred_lab]$ exit
+
+Script done on 2020-05-04 21:09:12-04:00 [COMMAND_EXIT_CODE="0"]
+Script started on 2020-05-04 20:33:00-04:00 [TERM="xterm-kitty" TTY="/dev/pts/1" COLUMNS="78" LINES="25"]
+]0;david@davidreidsma:~/Programming/Calvin/cs214/extra_cred_lab[david@davidreidsma extra_cred_lab]$ clojure
+Clojure 1.10.1
+user=> (fn [x] (+ x x))
+#object[user$eval136$fn__137 0x5e01a982 "user$eval136$fn__137@5e01a982"]
+user=> ^P  ^[[A    
+user=> (fn    (fn [x] + (+x  x x)) 21)
+42
+user=> ((fn [x y] (+ (* x x) (*y    y y))) 3 4)
+25
+user=> 
+]0;david@davidreidsma:~/Programming/Calvin/cs214/extra_cred_lab[david@davidreidsma extra_cred_lab]$ exit
+
+Script done on 2020-05-04 20:38:48-04:00 [COMMAND_EXIT_CODE="0"]
+Script started on 2020-05-04 21:47:03-04:00 [TERM="xterm-kitty" TTY="/dev/pts/1" COLUMNS="78" LINES="35"]
+]0;david@davidreidsma:~/Programming/Calvin/cs214/extra_cred_lab[david@davidreidsma extra_cred_lab]$ clojure
+Clojure 1.10.1
+user=> (def squareSquare (fn [x] (Math/pow (Math/pow x 2) 2)))
+#'user/squareSquare
+user=> (squareSquare 2)
+16.0
+user=> (squareSquare -2)
+16.0
+user=> (squareSquare 3)
+81.0
+user=> (squareSquare -3)
+81.0
+user=> 
+]0;david@davidreidsma:~/Programming/Calvin/cs214/extra_cred_lab[david@davidreidsma extra_cred_lab]$ exit
+
+Script done on 2020-05-04 21:48:52-04:00 [COMMAND_EXIT_CODE="0"]
+Script started on 2020-05-04 21:16:48-04:00 [TERM="xterm-kitty" TTY="/dev/pts/1" COLUMNS="78" LINES="35"]
+]0;david@davidreidsma:~/Programming/Calvin/cs214/extra_cred_lab[david@davidreidsma extra_cred_lab]$ clojure
+Clojure 1.10.1
+user=> (def triple (fn [x] (* x 3)))
+#'user/triple
+user=> (triple 4)
+12
+user=> (defn triple [x] (*x  x 3))
+#'user/triple
+user=> (triple 4)
+12
+user=> (#(+ (* %1 %1) (* %2 %2)) 3 4)
+25
+user=> (def sum2Squares #(+ (* %1 %1) (*%2   %2 %2)))
+#'user/sum2Squares
+user=> (sum2Squares 3 4)
+25
+user=> 
+]0;david@davidreidsma:~/Programming/Calvin/cs214/extra_cred_lab[david@davidreidsma extra_cred_lab]$ exit
+
+Script done on 2020-05-04 21:22:25-04:00 [COMMAND_EXIT_CODE="0"]
+Script started on 2020-05-08 00:13:45-04:00 [TERM="xterm-kitty" TTY="/dev/pts/1" COLUMNS="98" LINES="35"]
+]0;david@davidreidsma:~/Programming/Calvin/cs214/extra_cred_lab[david@davidreidsma extra_cred_lab]$ clojure
+Clojure 1.10.1
+user=> (defn negate [values] (map - values))
+#'user/negate
+user=> (negate [-1 2 -3])
+(1 -2 3)
+user=> (negate [4 -5 6])
+(-4 5 -6)
+user=> 
+]0;david@davidreidsma:~/Programming/Calvin/cs214/extra_cred_lab[david@davidreidsma extra_cred_lab]$ exit
+
+Script done on 2020-05-08 00:14:21-04:00 [COMMAND_EXIT_CODE="0"]
+Script started on 2020-05-04 22:06:46-04:00 [TERM="xterm-kitty" TTY="/dev/pts/1" COLUMNS="98" LINES="35"]
+]0;david@davidreidsma:~/Programming/Calvin/cs214/extra_cred_lab[david@davidreidsma extra_cred_lab]$ clojure
+Clojure 1.10.1
+user=> (map in c[   n c [1 2 3 4])
+(2 3 4 5)
+user=> (map - [1 2 3 4])
+(-1 -2 -3 -4)
+(user=> (map - [1 2 3 4] [1 2 3 4])
+(0 0 0 0)
+user=> map   (map even  ? [1 2 3 4])
+(false true false true)
+user=> (map str ["a" "b" "c"] ['A"   "A" "B" "C"])
+("aA" "bB" "cC")
+user=> (map count [[11] [11 22] [11 22 33]) ])
+(1 2 3)
+user=> (map + [1 2 3 4] [1 2 3   4])
+(2 4 6 8)
+user=> (map * [1 2 3 4] [1 2 3 4])
+(1 4 9 16)
+user=> (Math/abs -3)
+3
+user=> (map Math/abs [-1 2 -3 4 -5) ])
+Syntax error compiling at (REPL:1:1).
+Unable to find static field: abs in class java.lang.Math
+user=> (map (fn [x] (if (x < x 0) (- x) x)) [-1 2 -3 4 5 -5])
+(1 2 3 4 5)
+user=> (defn subtract-n [n sequence] (map (fn [x] (- x n  )) sequence))
+#'user/subtract-n
+user=> (subtract0n  -n 2 [5 6 7 8])
+(3 4 5 6)
+user=> (filter odd? [1 2 3 4])
+(1 3)
+user=> (filter even? [1 2 3 4])
+(2 4)
+user=> (filter neg? [1 2 3 4])
+()
+user=> (filter neg? [-1 2 1 -2 2 -3 3])
+(-1 -2 -3)
+user=> (filter pos? [-1 1 -2 2 -3 3])
+(1 2 3)
+user=> (filter (fn [x] (and (pos? x) (even? x))) [-1 1 -2 2 -3 3 -4 4])
+(2 4)
+user=> (filter (fn [x] (or (neg? x  ) (odd? x))) [-1 1 -2 2 -3 3 -4 4])
+(-1 1 -2 -3 3 -4)
+user=> 
+]0;david@davidreidsma:~/Programming/Calvin/cs214/extra_cred_lab[david@davidreidsma extra_cred_lab]$ exit
+
+Script done on 2020-05-04 22:20:20-04:00 [COMMAND_EXIT_CODE="0"]
+Script started on 2020-05-08 00:36:48-04:00 [TERM="xterm-kitty" TTY="/dev/pts/1" COLUMNS="57" LINES="31"]
+]0;david@davidreidsma:~/Programming/Calvin/cs214/extra_cred_lab[david@davidreidsma extra_cred_lab]$ clojure
+Clojure 1.10.1
+user=> (defn sumSquares [values] (reduce + (map (fn [x] (Math/pow x 2)) values )))
+#'user/sumSquares
+user=> (sumSquares '(1 2 3))
+14.0
+user=> (sumSquares '(1 2 3 4 5))
+55.0
+user=> (sumSquares [-1 -2 -3 0 1])
+15.0
+user=> 
+]0;david@davidreidsma:~/Programming/Calvin/cs214/extra_cred_lab[david@davidreidsma extra_cred_lab]$ exit
+
+Script done on 2020-05-08 00:42:15-04:00 [COMMAND_EXIT_CODE="0"]
+Script started on 2020-05-08 00:15:45-04:00 [TERM="xterm-kitty" TTY="/dev/pts/1" COLUMNS="98" LINES="35"]
+]0;david@davidreidsma:~/Programming/Calvin/cs214/extra_cred_lab[david@davidreidsma extra_cred_lab]$ clojure
+Clojure 1.10.1
+user=> (reduce + [1 2 3])
+6
+user=> (reduce + '(1 2 3))
+6
+user=> (reduce max [1 2 3])
+3
+user=> (reduce conj [1 2 3] [4 5 6])
+[1 2 3 4 5 6]
+user=> (reduce + [1 2 3 4 5])
+15
+user=> (reduce + 1 [2 3 4 5])
+15
+user=> (reduce + 1 '(2 3 4 5))
+15
+user=> (reduce max 5 [4 3 2 1])
+5
+user=> (reduce bit-or [1 2 3 4])
+7
+user=> (reduce str ["a" "b" "c"])
+"abc"
+user=> (reduce + 1 2 [3 4 5])
+Execution error (ArityException) at user/eval21 (REPL:1).
+Wrong number of args (4) passed to: clojure.core/reduce
+user=> (reduce + 1 '(2 3 4) 5)
+Execution error (ArityException) at user/eval23 (REPL:1).
+Wrong number of args (4) passed to: clojure.core/reduce
+user=> (defn csv [seq] (reduce (fn [a b] (str a "," b)) seq))
+#'user/csv
+user=> (csv [11 22 33])
+"11,22,33"
+user=> (defn totalItems [seqOfSeqs] (reduce + (map count seqOfSeqs)))
+#'user/totalItems
+user=> (totalItems [["Ann"] ["Bob" "Chris"] ["Dan" "Eve" "Fred"]])
+6
+user=> 
+]0;david@davidreidsma:~/Programming/Calvin/cs214/extra_cred_lab[david@davidreidsma extra_cred_lab]$ exit
+
+Script done on 2020-05-08 00:35:02-04:00 [COMMAND_EXIT_CODE="0"]
+Script started on 2020-05-08 00:43:12-04:00 [TERM="xterm-kitty" TTY="/dev/pts/1" COLUMNS="57" LINES="42"]
+]0;david@davidreidsma:~/Programming/Calvin/cs214/extra_cred_lab[david@davidreidsma extra_cred_lab]$ clojure
+Clojure 1.10.1
+user=> (defn incMaker [incValue] (fn [x] (+ x incValue)))
+#'user/incMaker
+user=> (incMaker 5)
+#object[user$incMaker$fn__136 0x58fb7731 "user$incMaker$fn__136@58fb7731"]
+user=> ((incMaker 5) 1)
+6
+user=> (def inc5 (incMaker 5))
+#'user/inc5
+user=> (inc5 2)
+7
+user=> (defn greetingBuilder [greeting] (fn [visitor] (str greeting ", " visitor "!")))
+#'user/greetingBuilder
+user=> (def csGreeting (greetingBuilder "Welcome to CS 214"))
+#'user/csGreeting
+user=> (csGreeting "Ann")
+"Welcome to CS 214, Ann!"
+user=> (def englishGreeting (greetingBuilder "Hello"))
+#'user/englishGreeting
+user=> (englishGreeting "Chris")
+"Hello, Chris!"
+user=> (def frenchGreeting (greetingBuilder "Bonjour"))
+#'user/frenchGreeting
+user=> (frenchGreeting "Chris")
+"Bonjour, Chris!"
+user=> 
+]0;david@davidreidsma:~/Programming/Calvin/cs214/extra_cred_lab[david@davidreidsma extra_cred_lab]$ exit
+
+Script done on 2020-05-08 00:47:22-04:00 [COMMAND_EXIT_CODE="0"]

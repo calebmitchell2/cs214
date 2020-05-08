@@ -1,0 +1,13 @@
+Script started on 2020-05-08 00:13:45-04:00 [TERM="xterm-kitty" TTY="/dev/pts/1" COLUMNS="98" LINES="35"]
+]0;david@davidreidsma:~/Programming/Calvin/cs214/extra_cred_lab[david@davidreidsma extra_cred_lab]$ clojure
+Clojure 1.10.1
+user=> (defn negate [values] (map - values))
+#'user/negate
+user=> (negate [-1 2 -3])
+(1 -2 3)
+user=> (negate [4 -5 6])
+(-4 5 -6)
+user=> 
+]0;david@davidreidsma:~/Programming/Calvin/cs214/extra_cred_lab[david@davidreidsma extra_cred_lab]$ exit
+
+Script done on 2020-05-08 00:14:21-04:00 [COMMAND_EXIT_CODE="0"]
